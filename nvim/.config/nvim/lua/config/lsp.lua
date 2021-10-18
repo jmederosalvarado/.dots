@@ -149,6 +149,9 @@ server_setups["null-ls"] = function()
 			null_ls.builtins.formatting.prettier_d_slim.with({
 				filetypes = vim.fn.extend(null_ls.builtins.formatting.prettier_d_slim.filetypes, { "solidity" }),
 			}),
+			null_ls.builtins.formatting.shfmt.with({
+				filetypes = vim.fn.extend(null_ls.builtins.formatting.shfmt.filetypes, { "zsh", "bash" }),
+			}),
 		},
 	})
 	return {

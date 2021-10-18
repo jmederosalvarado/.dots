@@ -1,0 +1,4 @@
+/nvim/.config/nvim/plugin/packer_compiled.lua
+
+/zsh/.zinit/*
+!/zsh/.zinit/bin
