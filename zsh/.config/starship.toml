@@ -1,0 +1,44 @@
+format = """
+$username\
+$hostname\
+$shlvl\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$memory_usage\
+$env_var\
+$custom\
+$cmd_duration\
+$time\
+$line_break\
+$jobs\
+$battery\
+$status\
+$character\
+"""
+
+[directory]
+read_only = " "
+style = "bold blue"
+
+[git_commit]
+tag_symbol = "  "
+
+[jobs]
+symbol = " "
+
+[git_status]
+format = '([\[$all_status$ahead_behind\]]($style) )'
+conflicted = ""
+ahead = "⇡"
+behind = "⇣"
+diverged = "⇕"
+up_to_date = ""
+untracked = "?"
+stashed = "$"
+modified = "!"
+staged = "+"
+renamed = "»"
+deleted = "✗"

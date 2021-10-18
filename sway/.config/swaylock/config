@@ -1,0 +1,9 @@
+clock
+screenshots
+indicator-idle-visible
+indicator-radius=100
+indicator-thickness=5
+effect-scale=0.5
+effect-blur=7x5
+effect-scale=2
+effect-vignette=0.5:0.5

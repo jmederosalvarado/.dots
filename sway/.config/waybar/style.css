@@ -1,0 +1,103 @@
+* {
+  font-family: Symbols Nerd Font, Iosevka;
+  font-size: 10pt;
+  border: none;
+  border-radius: 3px;
+  min-height: 0;
+}
+
+window#waybar {
+  /* background: rgba(35, 40, 52, 0.5); */
+  background: #272d38;
+  /* border-bottom: 1px solid #101521; */
+  color: #cbccc6;
+  border-radius: 0;
+}
+
+tooltip {
+  background: #272d38;
+  border: 1px solid #101521;
+}
+tooltip label {
+  color: #cbccc6;
+}
+
+#clock,
+#language,
+#mode,
+#idle_inhibitor,
+#workspaces,
+#temperature,
+#cpu,
+#memory,
+#disk,
+#backlight,
+#pulseaudio,
+#network,
+#mpd,
+#battery {
+  padding: 0 5px;
+  margin: 4px 5px;
+  color: #cbccc6;
+}
+
+#clock {
+  background-color: #cbccc6;
+  color: #101521;
+  padding: 0 10px;
+  /* margin-left: 0px; */
+}
+
+#idle_inhibitor.activated {
+  padding: 0 5px;
+  background: #191e2a;
+  color: #ffcc66;
+}
+
+#mode {
+  background: #191e2a;
+  border-bottom: 2px solid #ffcc66;
+  color: #ffcc66;
+}
+
+#workspaces button {
+  padding: 0 5px;
+  background: transparent;
+  color: #707a8c;
+  border: 1px solid transparent;
+}
+
+#workspaces button.focused {
+  background: #191e2a;
+  color: #ffcc66;
+  border: 1px solid #ffcc66;
+}
+
+#battery {
+  background-color: #cbccc6;
+  color: #101521;
+  padding: 0 10px;
+  /* margin-right: 0px; */
+}
+
+#battery.charging {
+  color: #101521;
+  background-color: #bae67e;
+}
+
+@keyframes blink {
+  to {
+    background-color: #33415e;
+    color: #101521;
+  }
+}
+
+#battery.warning:not(.charging) {
+  background: #ff3333;
+  color: #cbccc6;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
