@@ -196,9 +196,7 @@ zinit light 'zsh-users/zsh-completions'
 zinit ice wait lucid atload'hook_bindkeys'
 zinit light 'jeffreytse/zsh-vi-mode'
 
-zinit ice wait lucid atclone"dircolors -b LS_COLORS > clrs.zsh" \
-	atpull'%atclone' pick"clrs.zsh" nocompile'!' \
-	atload'zstyle ":completion:*" list-colors “${(s.:.)LS_COLORS}”'
-zinit light trapd00r/LS_COLORS
-
 # }}}
+
+eval $(dircolors -b)
+zstyle ":completion:*" list-colors "${(s.:.)LS_COLORS}"

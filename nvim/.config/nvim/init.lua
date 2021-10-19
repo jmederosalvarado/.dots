@@ -243,3 +243,5 @@ vim.cmd("runtime plugin/astronauta.vim")
 
 require("config.options")
 require("config.mappings")
+
+vim.cmd("au TextYankPost * silent! lua vim.highlight.on_yank()")
