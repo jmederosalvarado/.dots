@@ -167,6 +167,24 @@ alias ll='ls -lh'
 
 source /usr/share/nvm/init-nvm.sh
 
+# tabtab source for hh package
+# uninstall by removing these lines
+[[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
+
+# zsh parameter completion for the dotnet CLI
+
+_dotnet_zsh_complete()
+{
+  local completions=("$(dotnet complete "$words")")
+
+  reply=( "${(ps:\n:)completions}" )
+}
+
+compctl -K _dotnet_zsh_complete dotnet
+
+export DOTNET_ROOT="$HOME/.bin/dotnet"
+export PATH="$DOTNET_ROOT:$PATH"
+
 # Add path to user local tools
 export PATH="$HOME/.local/bin:$PATH"
 
@@ -193,10 +211,14 @@ zinit light 'zsh-users/zsh-autosuggestions'
 zinit ice wait lucid blockf atpull'zinit creinstall -q .'
 zinit light 'zsh-users/zsh-completions'
 
-zinit ice wait lucid atload'hook_bindkeys'
+zinit ice atload'hook_bindkeys'
 zinit light 'jeffreytse/zsh-vi-mode'
 
 # }}}
 
 eval $(dircolors -b)
 zstyle ":completion:*" list-colors "${(s.:.)LS_COLORS}"
+
+# Carefull
+alias rm="rmtrash"
+alias rmdir="rmdirtrash"
