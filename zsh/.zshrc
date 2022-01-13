@@ -210,7 +210,7 @@ zinit ice as"command" from"gh-r" \
 zinit light starship/starship
 
 zinit ice wait lucid atinit'zicompinit; zicdreplay'
-zinit light 'zdharma/fast-syntax-highlighting'
+zinit light 'zdharma-continuum/fast-syntax-highlighting'
 
 zinit ice wait lucid atload'_zsh_autosuggest_start'
 zinit light 'zsh-users/zsh-autosuggestions'
