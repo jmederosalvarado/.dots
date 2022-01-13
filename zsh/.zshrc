@@ -181,19 +181,24 @@ alias rmdir="rmdirtrash"
 
 # TOOLS {{{
 
-# zsh parameter completion for the dotnet CLI
+# dotnet
 
+# zsh parameter completion for the dotnet CLI
 _dotnet_zsh_complete()
 {
   local completions=("$(dotnet complete "$words")")
 
   reply=( "${(ps:\n:)completions}" )
 }
-
 compctl -K _dotnet_zsh_complete dotnet
 
-export DOTNET_ROOT="$HOME/.bin/dotnet"
+export DOTNET_ROOT="/usr/local/dotnet"
 export PATH="$DOTNET_ROOT:$PATH"
+
+# golang
+export GOPATH="$HOME/.go"
+export GOROOT="/usr/local/go"
+export PATH="$GOPATH/bin:$GOROOT/bin:$PATH"
 
 # Add path to user local tools
 export PATH="$HOME/.local/bin:$PATH"

@@ -36,8 +36,9 @@ if not vim.g.vscode then
 	vim.o.fillchars = "eob: "
 
 	-- fold
-	vim.o.foldminlines = 10
-	vim.o.foldminlines = 10
+	-- vim.o.foldminlines = 10
+	-- vim.o.foldminlines = 10
+    vim.o.foldmethod = "marker"
 end
 
 -- tabs, spaces and indentation
