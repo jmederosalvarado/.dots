@@ -155,21 +155,31 @@ function hook_bindkeys {
 	}
 }
 
+# Environment {{{
+
+if command -v nvim &>/dev/null ; then
+  export EDITOR="nvim" VISUAL="nvim"
+elif command -v vim &>/dev/null ; then
+  export EDITOR="vim" VISUAL="vim"
+elif command -v vi &>/dev/null ; then
+  export EDITOR="vi" VISUAL="vi"
+fi
+
+# }}}
+
 # ALIASES {{{
 
 alias ls='ls --color'
 alias l='ls -lah'
 alias ll='ls -lh'
 
+# Carefull
+alias rm="rmtrash"
+alias rmdir="rmdirtrash"
+
 # }}}
 
-# TOOLS SETUP {{{
-
-source /usr/share/nvm/init-nvm.sh
-
-# tabtab source for hh package
-# uninstall by removing these lines
-[[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
+# TOOLS {{{
 
 # zsh parameter completion for the dotnet CLI
 
@@ -192,10 +202,7 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # ZINIT {{{
 
-source ~/.zinit/bin/zinit.zsh
-
-# Annexes
-# zinit light zinit-zsh/z-a-bin-gem-node
+source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
 
 zinit ice as"command" from"gh-r" \
 	atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \
@@ -218,7 +225,3 @@ zinit light 'jeffreytse/zsh-vi-mode'
 
 eval $(dircolors -b)
 zstyle ":completion:*" list-colors "${(s.:.)LS_COLORS}"
-
-# Carefull
-alias rm="rmtrash"
-alias rmdir="rmdirtrash"
