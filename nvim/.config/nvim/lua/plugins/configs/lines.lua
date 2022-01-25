@@ -76,7 +76,6 @@ local delimiter_left = {
 	function()
 		return "▊"
 	end,
-	color = { fg = colors.light2, bg = colors.dark2 }, -- Sets highlighting of component
 	padding = { left = 0, right = 0 }, -- We don't need space before this
 }
 
@@ -180,7 +179,6 @@ local delimiter_right = {
 	function()
 		return "▊"
 	end,
-	color = "LualineDelimiter",
 	padding = { left = 1 },
 }
 
@@ -194,10 +192,12 @@ ins_left(diagnostics)
 
 -- ins_right(format)
 -- ins_right(encoding)
-ins_right(branch)
 ins_right(diff)
+ins_right(branch)
 ins_right(delimiter_right)
 
+ins_left(delimiter_left, true)
 ins_left({ "filename", path = 1 }, true)
+ins_right(delimiter_right, true)
 
 lualine.setup(config)

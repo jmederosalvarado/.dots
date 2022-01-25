@@ -155,6 +155,8 @@ function hook_bindkeys {
 	}
 }
 
+# }}}
+
 # Environment {{{
 
 if command -v nvim &>/dev/null ; then
@@ -199,6 +201,9 @@ export PATH="$DOTNET_ROOT:$PATH"
 export GOPATH="$HOME/.go"
 export GOROOT="/usr/local/go"
 export PATH="$GOPATH/bin:$GOROOT/bin:$PATH"
+
+# node
+export PATH="/usr/local/node/bin:$PATH"
 
 # Add path to user local tools
 export PATH="$HOME/.local/bin:$PATH"

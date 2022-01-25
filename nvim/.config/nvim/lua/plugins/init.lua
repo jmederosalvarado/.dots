@@ -122,7 +122,6 @@ local specs = function(use)
 		config = function()
 			require("octo").setup()
 		end,
-		disable = true,
 	})
 
 	-- }}}

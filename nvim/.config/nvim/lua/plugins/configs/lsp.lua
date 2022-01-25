@@ -8,7 +8,7 @@ local default_on_attach = function(client, bufnr)
 	map("gd", ":lua vim.lsp.buf.definition()<CR>")
 	map("gi", ":lua vim.lsp.buf.implementation()<CR>")
 	map("gr", ":lua vim.lsp.buf.references()<CR>")
-	map("gt", ":lua vim.lsp.buf.type_definition()<CR>")
+	map("gT", ":lua vim.lsp.buf.type_definition()<CR>")
 
 	map("K", ":lua vim.lsp.buf.hover()<CR>")
 	-- map("<c-k>", ":lua vim.lsp.buf.signature_help()<CR>")
@@ -22,7 +22,7 @@ local default_on_attach = function(client, bufnr)
 
 	map("[d", ":lua vim.diagnostic.goto_prev()<CR>")
 	map("]d", ":lua vim.diagnostic.goto_next()<CR>")
-	map("ge", ":lua vim.diagnostic.show_line_diagnostics()<CR>")
+	map("<leader>e", ":lua vim.diagnostic.open_float()<CR>")
 
 	map("<leader>fm", ":lua vim.lsp.buf.formatting_sync()<CR>")
 

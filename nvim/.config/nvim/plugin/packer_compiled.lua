@@ -97,7 +97,7 @@ _G.packer_plugins = {
     url = "https://github.com/rmagatti/auto-session"
   },
   ["better-escape.nvim"] = {
-    config = { "\27LJ\2\nX\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\2\fmapping\ajk\ftimeout\3È\1\nsetup\18better_escape\frequire\0" },
+    config = { "\27LJ\2\nX\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\2\ftimeout\3È\1\fmapping\ajk\nsetup\18better_escape\frequire\0" },
     loaded = true,
     path = "/home/jmederos/.local/share/nvim/site/pack/packer/start/better-escape.nvim",
     url = "https://github.com/max397574/better-escape.nvim"
@@ -264,7 +264,7 @@ _G.packer_plugins = {
     url = "https://github.com/windwp/nvim-autopairs"
   },
   ["nvim-cmp"] = {
-    after = { "cmp-buffer", "cmp-nvim-lsp", "cmp-nvim-lua", "cmp_luasnip", "cmp-path", "cmp-cmdline" },
+    after = { "cmp-nvim-lua", "cmp-path", "cmp_luasnip", "cmp-buffer", "cmp-cmdline", "cmp-nvim-lsp" },
     config = { "require('plugins.configs')('cmp')" },
     load_after = {
       LuaSnip = true,
@@ -337,6 +337,15 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/jmederos/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
     url = "https://github.com/kyazdani42/nvim-web-devicons"
+  },
+  ["octo.nvim"] = {
+    cond = { "return not vim.g.vscode" },
+    config = { "\27LJ\2\n2\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\tocto\frequire\0" },
+    loaded = false,
+    needs_bufread = false,
+    only_cond = true,
+    path = "/home/jmederos/.local/share/nvim/site/pack/packer/opt/octo.nvim",
+    url = "https://github.com/pwntester/octo.nvim"
   },
   ["packer.nvim"] = {
     loaded = true,
@@ -435,52 +444,22 @@ time([[Defining packer_plugins]], false)
 time([[Setup for auto-session]], true)
 try_loadstring("\27LJ\2\nQ\0\0\3\0\4\0\t6\0\0\0009\0\1\0006\1\0\0009\1\1\0019\1\2\1'\2\3\0&\1\2\1=\1\2\0K\0\1\0\21,winpos,terminal\19sessionoptions\6o\bvim\0", "setup", "auto-session")
 time([[Setup for auto-session]], false)
--- Config for: nvim-web-devicons
-time([[Config for nvim-web-devicons]], true)
-require('plugins.configs')('icons')
-time([[Config for nvim-web-devicons]], false)
 -- Config for: better-escape.nvim
 time([[Config for better-escape.nvim]], true)
-try_loadstring("\27LJ\2\nX\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\2\fmapping\ajk\ftimeout\3È\1\nsetup\18better_escape\frequire\0", "config", "better-escape.nvim")
+try_loadstring("\27LJ\2\nX\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\2\ftimeout\3È\1\fmapping\ajk\nsetup\18better_escape\frequire\0", "config", "better-escape.nvim")
 time([[Config for better-escape.nvim]], false)
 -- Config for: harpoon
 time([[Config for harpoon]], true)
 require('plugins.configs')('harpoon')
 time([[Config for harpoon]], false)
+-- Config for: nvim-web-devicons
+time([[Config for nvim-web-devicons]], true)
+require('plugins.configs')('icons')
+time([[Config for nvim-web-devicons]], false)
 -- Conditional loads
-time([[Conditional loading of lualine.nvim]], true)
-  require("packer.load")({"lualine.nvim"}, {}, _G.packer_plugins)
-time([[Conditional loading of lualine.nvim]], false)
-time([[Conditional loading of markdown-preview.nvim]], true)
-  require("packer.load")({"markdown-preview.nvim"}, {}, _G.packer_plugins)
-time([[Conditional loading of markdown-preview.nvim]], false)
-time([[Conditional loading of neoscroll.nvim]], true)
-  require("packer.load")({"neoscroll.nvim"}, {}, _G.packer_plugins)
-time([[Conditional loading of neoscroll.nvim]], false)
-time([[Conditional loading of vim-fugitive]], true)
-  require("packer.load")({"vim-fugitive"}, {}, _G.packer_plugins)
-time([[Conditional loading of vim-fugitive]], false)
-time([[Conditional loading of vim-solidity]], true)
-  require("packer.load")({"vim-solidity"}, {}, _G.packer_plugins)
-time([[Conditional loading of vim-solidity]], false)
-time([[Conditional loading of null-ls.nvim]], true)
-  require("packer.load")({"null-ls.nvim"}, {}, _G.packer_plugins)
-time([[Conditional loading of null-ls.nvim]], false)
-time([[Conditional loading of nvim-lsp-ts-utils]], true)
-  require("packer.load")({"nvim-lsp-ts-utils"}, {}, _G.packer_plugins)
-time([[Conditional loading of nvim-lsp-ts-utils]], false)
-time([[Conditional loading of trouble.nvim]], true)
-  require("packer.load")({"trouble.nvim"}, {}, _G.packer_plugins)
-time([[Conditional loading of trouble.nvim]], false)
 time([[Conditional loading of lsp_signature.nvim]], true)
   require("packer.load")({"lsp_signature.nvim"}, {}, _G.packer_plugins)
 time([[Conditional loading of lsp_signature.nvim]], false)
-time([[Conditional loading of nvim-treesitter]], true)
-  require("packer.load")({"nvim-treesitter"}, {}, _G.packer_plugins)
-time([[Conditional loading of nvim-treesitter]], false)
-time([[Conditional loading of auto-session]], true)
-  require("packer.load")({"auto-session"}, {}, _G.packer_plugins)
-time([[Conditional loading of auto-session]], false)
 time([[Conditional loading of nvim-autopairs]], true)
   require("packer.load")({"nvim-autopairs"}, {}, _G.packer_plugins)
 time([[Conditional loading of nvim-autopairs]], false)
@@ -490,27 +469,60 @@ time([[Conditional loading of friendly-snippets]], false)
 time([[Conditional loading of LuaSnip]], true)
   require("packer.load")({"LuaSnip"}, {}, _G.packer_plugins)
 time([[Conditional loading of LuaSnip]], false)
-time([[Conditional loading of lua-dev.nvim]], true)
-  require("packer.load")({"lua-dev.nvim"}, {}, _G.packer_plugins)
-time([[Conditional loading of lua-dev.nvim]], false)
-time([[Conditional loading of nvim-lsp-installer]], true)
-  require("packer.load")({"nvim-lsp-installer"}, {}, _G.packer_plugins)
-time([[Conditional loading of nvim-lsp-installer]], false)
-time([[Conditional loading of nvim-tree.lua]], true)
-  require("packer.load")({"nvim-tree.lua"}, {}, _G.packer_plugins)
-time([[Conditional loading of nvim-tree.lua]], false)
 time([[Conditional loading of gitsigns.nvim]], true)
   require("packer.load")({"gitsigns.nvim"}, {}, _G.packer_plugins)
 time([[Conditional loading of gitsigns.nvim]], false)
-time([[Conditional loading of telescope-fzf-native.nvim]], true)
-  require("packer.load")({"telescope-fzf-native.nvim"}, {}, _G.packer_plugins)
-time([[Conditional loading of telescope-fzf-native.nvim]], false)
 time([[Conditional loading of indent-blankline.nvim]], true)
   require("packer.load")({"indent-blankline.nvim"}, {}, _G.packer_plugins)
 time([[Conditional loading of indent-blankline.nvim]], false)
+time([[Conditional loading of octo.nvim]], true)
+  require("packer.load")({"octo.nvim"}, {}, _G.packer_plugins)
+time([[Conditional loading of octo.nvim]], false)
+time([[Conditional loading of vim-solidity]], true)
+  require("packer.load")({"vim-solidity"}, {}, _G.packer_plugins)
+time([[Conditional loading of vim-solidity]], false)
+time([[Conditional loading of lualine.nvim]], true)
+  require("packer.load")({"lualine.nvim"}, {}, _G.packer_plugins)
+time([[Conditional loading of lualine.nvim]], false)
+time([[Conditional loading of markdown-preview.nvim]], true)
+  require("packer.load")({"markdown-preview.nvim"}, {}, _G.packer_plugins)
+time([[Conditional loading of markdown-preview.nvim]], false)
+time([[Conditional loading of neoscroll.nvim]], true)
+  require("packer.load")({"neoscroll.nvim"}, {}, _G.packer_plugins)
+time([[Conditional loading of neoscroll.nvim]], false)
+time([[Conditional loading of nvim-lsp-ts-utils]], true)
+  require("packer.load")({"nvim-lsp-ts-utils"}, {}, _G.packer_plugins)
+time([[Conditional loading of nvim-lsp-ts-utils]], false)
+time([[Conditional loading of nvim-treesitter]], true)
+  require("packer.load")({"nvim-treesitter"}, {}, _G.packer_plugins)
+time([[Conditional loading of nvim-treesitter]], false)
 time([[Conditional loading of Comment.nvim]], true)
   require("packer.load")({"Comment.nvim"}, {}, _G.packer_plugins)
 time([[Conditional loading of Comment.nvim]], false)
+time([[Conditional loading of vim-fugitive]], true)
+  require("packer.load")({"vim-fugitive"}, {}, _G.packer_plugins)
+time([[Conditional loading of vim-fugitive]], false)
+time([[Conditional loading of telescope-fzf-native.nvim]], true)
+  require("packer.load")({"telescope-fzf-native.nvim"}, {}, _G.packer_plugins)
+time([[Conditional loading of telescope-fzf-native.nvim]], false)
+time([[Conditional loading of auto-session]], true)
+  require("packer.load")({"auto-session"}, {}, _G.packer_plugins)
+time([[Conditional loading of auto-session]], false)
+time([[Conditional loading of nvim-tree.lua]], true)
+  require("packer.load")({"nvim-tree.lua"}, {}, _G.packer_plugins)
+time([[Conditional loading of nvim-tree.lua]], false)
+time([[Conditional loading of nvim-lsp-installer]], true)
+  require("packer.load")({"nvim-lsp-installer"}, {}, _G.packer_plugins)
+time([[Conditional loading of nvim-lsp-installer]], false)
+time([[Conditional loading of lua-dev.nvim]], true)
+  require("packer.load")({"lua-dev.nvim"}, {}, _G.packer_plugins)
+time([[Conditional loading of lua-dev.nvim]], false)
+time([[Conditional loading of null-ls.nvim]], true)
+  require("packer.load")({"null-ls.nvim"}, {}, _G.packer_plugins)
+time([[Conditional loading of null-ls.nvim]], false)
+time([[Conditional loading of trouble.nvim]], true)
+  require("packer.load")({"trouble.nvim"}, {}, _G.packer_plugins)
+time([[Conditional loading of trouble.nvim]], false)
 if should_profile then save_profiles() end
 
 end)
