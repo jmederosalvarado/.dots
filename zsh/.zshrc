@@ -205,8 +205,14 @@ export PATH="$GOPATH/bin:$GOROOT/bin:$PATH"
 # node
 export PATH="/usr/local/node/bin:$PATH"
 
-# Add path to user local tools
+# use gnu coreutils by default
+export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
+
+# add path to user local tools
 export PATH="$HOME/.local/bin:$PATH"
+
+# add brew zsh completions to fpath
+fpath=("$(brew --prefix)/share/zsh/site-functions" $fpath)
 
 # }}}
 
