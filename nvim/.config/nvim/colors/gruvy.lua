@@ -219,9 +219,11 @@ highlight("NvimTreeWindowPicker", p.bright_red, p.dark2)
 
 -- }}}
 
--- Bufferline
+-- Bufferline {{{
 
 highlight("BufferlineNvimTreeOffset", p.darker, p.bright_blue, "bold")
+
+-- }}}
 
 -- Telescope {{{
 
@@ -259,6 +261,12 @@ highlight("LualineModeCOMMAND", p.bright_purple, p.dark2)
 highlight("LualineModeSHELL", p.bright_green, p.dark2)
 highlight("LualineModeTERMINAL", p.bright_green, p.dark2)
 highlight("LualineModeMORE", p.bright_aqua, p.dark2)
+
+-- }}}
+
+-- IndentBlankline {{{
+
+highlight("IndentBlanklineContextChar", p.light2, nil)
 
 -- }}}
 

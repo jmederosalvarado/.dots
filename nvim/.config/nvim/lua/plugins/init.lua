@@ -109,11 +109,7 @@ local specs = function(use)
 	use({
 		"lewis6991/gitsigns.nvim",
 		cond = not_vscode,
-		config = function()
-			require("gitsigns").setup({
-				current_line_blame = true,
-			})
-		end,
+		config = use_config("gitsigns"),
 	})
 
 	use({
@@ -197,6 +193,12 @@ local specs = function(use)
 		cond = not_vscode,
 		config = use_config("toggleterm"),
 		disable = true,
+	})
+
+	use({
+		"folke/todo-comments.nvim",
+		requires = "nvim-lua/plenary.nvim",
+		config = use_config("todo_comments"),
 	})
 
 	use("norcalli/nvim-colorizer.lua")

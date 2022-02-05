@@ -73,7 +73,7 @@ zstyle ':completion:*' cache-path "$HOME/.zcompdump"
 
 # }}}
 
-# # KEYBINDINGS {{{
+# KEYBINDINGS {{{
 
 function hook_bindkeys {
 	autoload -U up-line-or-beginning-search &&
@@ -169,50 +169,37 @@ fi
 
 # }}}
 
-# ALIASES {{{
+# ALIASES & HELPERS {{{
+
+take () {
+    mkdir -p $1 && cd $1
+}
 
 alias ls='ls --color'
 alias l='ls -lah'
 alias ll='ls -lh'
 
 # Carefull
-alias rm="rmtrash"
-alias rmdir="rmdirtrash"
+# alias rm="rmtrash"
+# alias rmdir="rmdirtrash"
 
 # }}}
 
 # TOOLS {{{
 
-# dotnet
+if command -v brew &>/dev/null; then
+    # add brew zsh completions to fpath
+    fpath=("$(brew --prefix)/share/zsh/site-functions" $fpath)
 
-# zsh parameter completion for the dotnet CLI
-_dotnet_zsh_complete()
-{
-  local completions=("$(dotnet complete "$words")")
+    # asdf
+    source "$(brew --prefix asdf)/libexec/asdf.sh"
 
-  reply=( "${(ps:\n:)completions}" )
-}
-compctl -K _dotnet_zsh_complete dotnet
-
-export DOTNET_ROOT="/usr/local/dotnet"
-export PATH="$DOTNET_ROOT:$PATH"
-
-# golang
-export GOPATH="$HOME/.go"
-export GOROOT="/usr/local/go"
-export PATH="$GOPATH/bin:$GOROOT/bin:$PATH"
-
-# node
-export PATH="/usr/local/node/bin:$PATH"
-
-# use gnu coreutils by default
-export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
+    # use gnu coreutils by default
+    export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
+fi
 
 # add path to user local tools
 export PATH="$HOME/.local/bin:$PATH"
-
-# add brew zsh completions to fpath
-fpath=("$(brew --prefix)/share/zsh/site-functions" $fpath)
 
 # }}}
 
