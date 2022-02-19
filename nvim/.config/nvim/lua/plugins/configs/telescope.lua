@@ -10,6 +10,19 @@ vim.keymap.set("n", "<leader>fgs", ":Telescope git_status <CR>", { silent = true
 vim.keymap.set("n", "<leader>fw", ":Telescope live_grep <CR>", { silent = true })
 vim.keymap.set("n", "<leader>fo", ":Telescope oldfiles <CR>", { silent = true })
 
+vim.keymap.set(
+	"n",
+	"<leader>wt",
+	":lua require('telescope').extensions.git_worktree.git_worktrees()<CR>",
+	{ silent = true }
+)
+vim.keymap.set(
+	"n",
+	"<leader>nwt",
+	":lua require('telescope').extensions.git_worktree.create_git_worktree()<CR>",
+	{ silent = true }
+)
+
 local telescope = require("telescope")
 
 telescope.setup({
@@ -20,3 +33,4 @@ telescope.setup({
 })
 
 telescope.load_extension("fzf")
+telescope.load_extension("git_worktree")

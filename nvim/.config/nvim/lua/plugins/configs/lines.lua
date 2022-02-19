@@ -43,33 +43,33 @@ local config = {
 		lualine_x = {},
 	},
 	inactive_sections = {
-	  -- these are to remove the defaults
-	  lualine_a = {},
-	  lualine_b = {},
-	  lualine_y = {},
-	  lualine_z = {},
-	  lualine_c = {},
-	  lualine_x = {},
+		-- these are to remove the defaults
+		lualine_a = {},
+		lualine_b = {},
+		lualine_y = {},
+		lualine_z = {},
+		lualine_c = {},
+		lualine_x = {},
 	},
-    extensions = { "fugitive" }
+	extensions = { "fugitive" },
 }
 
 -- Inserts a component in lualine_c at left section
 local function ins_left(component, inactive)
-    if inactive then
-        table.insert(config.inactive_sections.lualine_c, component)
-    else
-        table.insert(config.sections.lualine_c, component)
-    end
+	if inactive then
+		table.insert(config.inactive_sections.lualine_c, component)
+	else
+		table.insert(config.sections.lualine_c, component)
+	end
 end
 
 -- Inserts a component in lualine_x ot right section
 local function ins_right(component, inactive)
-    if inactive then
-        table.insert(config.inactive_sections.lualine_x, component)
-    else
-        table.insert(config.sections.lualine_x, component)
-    end
+	if inactive then
+		table.insert(config.inactive_sections.lualine_x, component)
+	else
+		table.insert(config.sections.lualine_x, component)
+	end
 end
 
 local delimiter_left = {

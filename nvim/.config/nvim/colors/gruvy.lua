@@ -270,4 +270,15 @@ highlight("IndentBlanklineContextChar", p.light2, nil)
 
 -- }}}
 
+-- ConflictMarker {{{
+
+-- highlight("ConflictMarker", nil, p.bright_aqua)
+highlight("ConflictMarkerBegin", p.bright_aqua, nil, "bold")
+highlight("ConflictMarkerEnd", p.bright_blue, nil, "bold")
+highlight("ConflictMarkerOurs", nil, p.bright_aqua)
+highlight("ConflictMarkerTheirs", nil, p.bright_blue)
+-- highlight("ConflictMarkerCommonAncestorsHunk", nil, p.bright_purple)
+
+-- }}}
+
 -- }}}

@@ -12,11 +12,27 @@ vim.g.nvim_tree_window_picker_exclude = {
 	buftype = { "terminal" },
 }
 
-vim.g.nvim_tree_show_icons = {
-	folders_arrows = 1,
-	folders = 1,
-	files = 1,
-	git = 0,
+vim.g.nvim_tree_icons = {
+	default = "",
+	symlink = "",
+	git = {
+		ignored = "",
+		unstaged = "!",
+		staged = "+",
+		unmerged = "",
+		renamed = "»",
+		untracked = "?",
+		deleted = "✗",
+	},
+	folder = {
+		default = "",
+		empty = "",
+		symlink = "",
+
+		open = "",
+		empty_open = "",
+		symlink_open = "",
+	},
 }
 
 require("nvim-tree").setup({
@@ -27,11 +43,21 @@ require("nvim-tree").setup({
 	},
 	auto_close = false,
 	open_on_tab = false,
-	hijack_cursor = true,
+	hijack_cursor = false,
 	update_cwd = true,
 	update_focused_file = {
 		enable = true,
 		update_cwd = false,
+	},
+	diagnostics = {
+		enable = true,
+		show_on_dirs = true,
+		icons = {
+			hint = "",
+			info = "",
+			warning = "",
+			error = "",
+		},
 	},
 	git = {
 		ignore = false,

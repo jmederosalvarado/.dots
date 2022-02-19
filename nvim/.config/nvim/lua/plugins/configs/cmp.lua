@@ -74,12 +74,29 @@ cmp.setup({
 
 		["<C-u>"] = cmp.mapping.scroll_docs(-4),
 		["<C-d>"] = cmp.mapping.scroll_docs(4),
+
+		["<Tab>"] = cmp.mapping(function(fallback)
+			if luasnip.expand_or_locally_jumpable() and luasnip.jumpable(1) then
+				luasnip.jump(1)
+			else
+				fallback()
+			end
+		end, { "i", "s" }),
+
+		["<S-Tab>"] = cmp.mapping(function(fallback)
+			if luasnip.jumpable(-1) then
+				luasnip.jump(-1)
+			else
+				fallback()
+			end
+		end, { "i", "s" }),
 	},
 	sources = {
 		{ name = "nvim_lsp" },
+		{ name = "nvim_lsp_signature_help" },
 		{ name = "luasnip" },
 		{ name = "buffer", max_item_count = 5 },
-		{ name = "nvim_lua" }, -- use lua lsp instead
+		-- { name = "nvim_lua" }, -- use lua lsp instead
 		{ name = "path" },
 	},
 	experimental = {

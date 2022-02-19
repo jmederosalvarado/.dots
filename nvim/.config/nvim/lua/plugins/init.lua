@@ -22,7 +22,7 @@ local specs = function(use)
 			"null-ls.nvim",
 			"nvim-lsp-ts-utils",
 			"trouble.nvim",
-			"lsp_signature.nvim",
+			-- "lsp_signature.nvim",
 		},
 		requires = {
 			{ "williamboman/nvim-lsp-installer", cond = not_vscode },
@@ -30,11 +30,11 @@ local specs = function(use)
 			{ "jose-elias-alvarez/null-ls.nvim", cond = not_vscode },
 			{ "jose-elias-alvarez/nvim-lsp-ts-utils", cond = not_vscode },
 			{ "folke/trouble.nvim", cond = not_vscode },
-			{
-				"ray-x/lsp_signature.nvim",
-				cond = not_vscode,
-				config = use_config("lsp_signature"),
-			},
+			-- {
+			-- 	"ray-x/lsp_signature.nvim",
+			-- 	cond = not_vscode,
+			-- 	config = use_config("lsp_signature"),
+			-- },
 		},
 	})
 
@@ -60,6 +60,7 @@ local specs = function(use)
 			{ "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
 			{ "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
 			{ "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" },
+			{ "hrsh7th/cmp-nvim-lsp-signature-help", after = "nvim-cmp" },
 			{ "hrsh7th/cmp-buffer", after = "nvim-cmp" },
 			{ "hrsh7th/cmp-path", after = "nvim-cmp" },
 			{ "hrsh7th/cmp-cmdline", after = "nvim-cmp" },
@@ -103,6 +104,8 @@ local specs = function(use)
 		cond = not_vscode,
 		config = function()
 			vim.keymap.set("n", "<leader>gs", "<cmd>G<CR>", { silent = true })
+			vim.keymap.set("n", "<leader>gf", "<cmd>diffget //2<CR>", { silent = true })
+			vim.keymap.set("n", "<leader>gj", "<cmd>diffget //3<CR>", { silent = true })
 		end,
 	})
 
@@ -113,11 +116,36 @@ local specs = function(use)
 	})
 
 	use({
+		"TimUntersberger/neogit",
+		cond = not_vscode,
+		config = use_setup("neogit"),
+		requires = "nvim-lua/plenary.nvim",
+	})
+
+	use({
+		"sindrets/diffview.nvim",
+		cond = not_vscode,
+		config = use_setup("diffview"),
+		requires = "nvim-lua/plenary.nvim",
+	})
+
+	use({
+		"ThePrimeagen/git-worktree.nvim",
+		-- cond = not_vscode, -- TODO this is breaking telescope
+		config = use_setup("git-worktree"),
+	})
+
+	--   use({
+	--       "rhysd/conflict-marker.vim",
+	-- cond = not_vscode,
+	--       setup = use_config("conflict_marker_setup"),
+	--       config = use_config("conflict_marker_config")
+	--   })
+
+	use({
 		"pwntester/octo.nvim",
 		cond = not_vscode,
-		config = function()
-			require("octo").setup()
-		end,
+		config = use_setup("octo"),
 	})
 
 	-- }}}

@@ -38,7 +38,7 @@ if not vim.g.vscode then
 	-- fold
 	-- vim.o.foldminlines = 10
 	-- vim.o.foldminlines = 10
-    vim.o.foldmethod = "marker"
+	vim.o.foldmethod = "marker"
 end
 
 -- tabs, spaces and indentation

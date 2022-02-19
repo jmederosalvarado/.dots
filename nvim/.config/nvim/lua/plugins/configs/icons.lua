@@ -3,22 +3,12 @@ local colors = require("core.colors")
 
 icons.setup({
 	override = {
-		c = {
-			icon = "",
-			color = colors.bright_blue,
-			name = "c",
-		},
-		css = {
-			icon = "",
-			color = colors.bright_blue,
-			name = "css",
-		},
 		deb = {
 			icon = "",
 			color = colors.bright_aqua,
 			name = "deb",
 		},
-		Dockerfile = {
+		dockerfile = {
 			icon = "",
 			color = colors.bright_aqua,
 			name = "Dockerfile",
@@ -38,15 +28,15 @@ icons.setup({
 			color = colors.bright_purple,
 			name = "jpg",
 		},
+		png = {
+			icon = "",
+			color = colors.bright_purple,
+			name = "png",
+		},
 		js = {
 			icon = "",
 			color = colors.bright_yellow,
 			name = "js",
-		},
-		kt = {
-			icon = "󱈙",
-			color = colors.orange1,
-			name = "kt",
 		},
 		lock = {
 			icon = "",
@@ -72,11 +62,6 @@ icons.setup({
 			icon = "",
 			color = colors.light0,
 			name = "out",
-		},
-		png = {
-			icon = "",
-			color = colors.bright_purple,
-			name = "png",
 		},
 		py = {
 			icon = "",

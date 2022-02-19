@@ -24,12 +24,19 @@ local default_on_attach = function(client, bufnr)
 	map("]d", ":lua vim.diagnostic.goto_next()<CR>")
 	map("<leader>e", ":lua vim.diagnostic.open_float()<CR>")
 
-	map("<leader>fm", ":lua vim.lsp.buf.formatting_sync()<CR>")
-
-	vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
-
-	if client.name == "pyright" or client.name == "sumneko_lua" then
+	local disable_formatting = { "pyright", "sumneko_lua" }
+	if vim.tbl_contains(disable_formatting, client.name) then
 		client.resolved_capabilities.document_formatting = false
+	end
+
+	if client.resolved_capabilities.document_formatting then
+		map("<leader>fm", ":lua vim.lsp.buf.formatting_sync()<CR>")
+		vim.cmd([[
+            augroup LspFormatting
+                autocmd! * <buffer>
+                autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
+            augroup END
+        ]])
 	end
 end
 
@@ -118,26 +125,23 @@ server_setups["tsserver"] = {
 
 -- Null {{{
 
-server_setups["null-ls"] = function()
-	local null_ls = require("null-ls")
-	null_ls.config({
-		sources = {
-			null_ls.builtins.formatting.black,
-			null_ls.builtins.formatting.isort,
-			null_ls.builtins.formatting.stylua,
-			null_ls.builtins.formatting.prettierd,
-			null_ls.builtins.formatting.prettier_d_slim.with({
-				filetypes = vim.fn.extend(null_ls.builtins.formatting.prettier_d_slim.filetypes, { "solidity" }),
-			}),
-			null_ls.builtins.formatting.shfmt.with({
-				filetypes = vim.fn.extend(null_ls.builtins.formatting.shfmt.filetypes, { "zsh", "bash" }),
-			}),
-		},
-	})
-	return {
-		on_attach = default_on_attach,
-	}
-end
+local nls = require("null-ls")
+nls.setup({
+	sources = {
+		nls.builtins.formatting.black,
+		nls.builtins.formatting.isort,
+		nls.builtins.formatting.stylua,
+		nls.builtins.formatting.prettierd,
+		nls.builtins.formatting.nixfmt,
+		nls.builtins.formatting.prettier_d_slim.with({
+			filetypes = vim.fn.extend(nls.builtins.formatting.prettier_d_slim.filetypes, { "solidity" }),
+		}),
+		nls.builtins.formatting.shfmt.with({
+			filetypes = vim.fn.extend(nls.builtins.formatting.shfmt.filetypes, { "zsh", "bash" }),
+		}),
+	},
+	on_attach = default_on_attach,
+})
 
 -- }}}
 
