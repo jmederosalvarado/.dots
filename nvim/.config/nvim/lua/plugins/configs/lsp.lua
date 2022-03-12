@@ -60,6 +60,22 @@ server_setups["sumneko_lua"] = require("lua-dev").setup({
 
 -- }}}
 
+-- Pyright {{{
+
+server_setups["pyright"] = {
+	on_attach = default_on_attach,
+	settings = {
+		python = {
+			analysis = {
+				diagnosticMode = "workspace",
+				typeCheckingMode = "off",
+			},
+		},
+	},
+}
+
+-- }}}
+
 -- Rust {{{
 
 server_setups["rust-analyzer"] = {
@@ -129,7 +145,9 @@ local nls = require("null-ls")
 nls.setup({
 	sources = {
 		nls.builtins.formatting.black,
-		nls.builtins.formatting.isort,
+		nls.builtins.formatting.isort.with({
+			args = { "--stdout", "--profile", "black", "-" },
+		}),
 		nls.builtins.formatting.stylua,
 		nls.builtins.formatting.prettierd,
 		nls.builtins.formatting.nixfmt,

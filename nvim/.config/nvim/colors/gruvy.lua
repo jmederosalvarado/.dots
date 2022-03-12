@@ -17,7 +17,7 @@ local highlight = function(group, guifg, guibg, attr, guisp)
 	vim.api.nvim_command("highlight " .. table.concat(parts, " "))
 end
 
-local p = require("core.colors")
+local p = require("palettes.gruvy")
 
 -- Vim editor colors {{{
 
@@ -250,20 +250,6 @@ highlight("HarpoonWindow", nil, p.darker)
 
 -- }}}
 
--- Lualine {{{
-
-highlight("LualineModeNORMAL", p.bright_red, p.dark2)
-highlight("LualineModeINSERT", p.bright_green, p.dark2)
-highlight("LualineModeVISUAL", p.bright_aqua, p.dark2)
-highlight("LualineModeSELECT", p.bright_blue, p.dark2)
-highlight("LualineModeREPLACE", p.bright_orange, p.dark2)
-highlight("LualineModeCOMMAND", p.bright_purple, p.dark2)
-highlight("LualineModeSHELL", p.bright_green, p.dark2)
-highlight("LualineModeTERMINAL", p.bright_green, p.dark2)
-highlight("LualineModeMORE", p.bright_aqua, p.dark2)
-
--- }}}
-
 -- IndentBlankline {{{
 
 highlight("IndentBlanklineContextChar", p.light2, nil)
@@ -278,6 +264,28 @@ highlight("ConflictMarkerEnd", p.bright_blue, nil, "bold")
 highlight("ConflictMarkerOurs", nil, p.bright_aqua)
 highlight("ConflictMarkerTheirs", nil, p.bright_blue)
 -- highlight("ConflictMarkerCommonAncestorsHunk", nil, p.bright_purple)
+
+-- }}}
+
+-- Glyph Palette {{{}
+
+-- highlight("GlyphPaletteDirectory", p.dark0, "NONE")
+highlight("GlyphPalette0", p.darker, "NONE")
+highlight("GlyphPalette1", p.neutral_red, "NONE")
+highlight("GlyphPalette2", p.neutral_green, "NONE")
+highlight("GlyphPalette3", p.neutral_yellow, "NONE")
+highlight("GlyphPalette4", p.neutral_blue, "NONE")
+highlight("GlyphPalette5", p.neutral_purple, "NONE")
+highlight("GlyphPalette6", p.neutral_aqua, "NONE")
+highlight("GlyphPalette7", p.light1, "NONE")
+highlight("GlyphPalette8", p.dark0, "NONE")
+highlight("GlyphPalette9", p.bright_red, "NONE")
+highlight("GlyphPalette10", p.bright_green, "NONE")
+highlight("GlyphPalette11", p.bright_yellow, "NONE")
+highlight("GlyphPalette12", p.bright_blue, "NONE")
+highlight("GlyphPalette13", p.bright_purple, "NONE")
+highlight("GlyphPalette14", p.bright_aqua, "NONE")
+highlight("GlyphPalette15", p.light0, "NONE")
 
 -- }}}
 

@@ -68,12 +68,29 @@ diagnostic_sign_define("Hint", "")
 diagnostic_sign_define("Warn", "")
 
 vim.diagnostic.config({
-	virtual_text = { spacing = 4, prefix = "", source = "if_many" },
+	virtual_text = {
+		spacing = 4,
+		prefix = "",
+		source = "if_many",
+		severity = {
+			min = vim.diagnostic.severity.INFO,
+		},
+	},
 	severity_sort = true,
 	update_in_insert = true,
 	underline = false,
 	float = { border = "solid" },
 })
+
+-- local diagnostic_get = vim.diagnostic.get
+-- vim.diagnostic.get = function(bufnr, opts)
+-- 	return diagnostic_get(
+-- 		bufnr,
+-- 		vim.tbl_deep_extend("force", opts or {}, {
+-- 			severity = { min = vim.diagnostic.severity.INFO },
+-- 		})
+-- 	)
+-- end
 
 -- }}}
 

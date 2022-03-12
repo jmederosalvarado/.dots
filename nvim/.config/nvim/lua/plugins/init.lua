@@ -154,6 +154,7 @@ local specs = function(use)
 
 	use({
 		"kyazdani42/nvim-web-devicons",
+		requires = "lambdalisue/glyph-palette.vim",
 		config = use_config("icons"),
 	})
 
@@ -182,6 +183,18 @@ local specs = function(use)
 		"lukas-reineke/indent-blankline.nvim",
 		cond = not_vscode,
 		config = use_config("indent_blankline"),
+	})
+
+	use({
+		"folke/tokyonight.nvim",
+		cond = not_vscode,
+		config = use_config("tokyonight"),
+	})
+
+	use({
+		"navarasu/onedark.nvim",
+		cond = not_vscode,
+		config = use_config("onedark"),
 	})
 
 	-- }}}
@@ -250,7 +263,10 @@ local specs = function(use)
 			})
 		end,
 	})
-	use("ggandor/lightspeed.nvim")
+	use({
+		"ggandor/lightspeed.nvim",
+		config = use_config("lightspeed"),
+	})
 	use("andymass/vim-matchup")
 	use("wellle/targets.vim")
 	use({
@@ -260,6 +276,12 @@ local specs = function(use)
 	})
 
 	use({ "tomlion/vim-solidity", cond = not_vscode })
+
+	use({
+		"untitled-ai/jupyter_ascending.vim",
+		cond = not_vscode,
+		config = use_config("jupyter"),
+	})
 
 	-- }}}
 end

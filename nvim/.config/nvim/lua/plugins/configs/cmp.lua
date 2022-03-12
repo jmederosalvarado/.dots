@@ -126,4 +126,4 @@ cmp.setup({
 require("nvim-autopairs").setup({ check_ts = true })
 cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done({ map_char = { tex = "" } }))
 
-require("luasnip/loaders/from_vscode").load()
+require("luasnip.loaders.from_vscode").load()

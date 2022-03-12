@@ -30,7 +30,8 @@ if not vim.g.vscode then
 
 	-- show some invisible characters (e.g. tabs, spaces)
 	vim.o.list = true
-	vim.o.listchars = "trail:·,tab:» "
+	-- vim.o.listchars = "trail:·,tab:» "
+	vim.o.listchars = "trail: ,tab:» "
 	vim.o.showbreak = "↪ "
 	-- disable tilde on end of buffer: https://github.com/neovim/neovim/pull/8546#issuecomment-643643758
 	vim.o.fillchars = "eob: "

@@ -196,7 +196,21 @@ if command -v brew &>/dev/null; then
 
     # use gnu coreutils by default
     export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
+
+    # # haskell
+    # export PATH="$(brew --prefix llvm)/bin:$PATH"
 fi
+
+function source_opt {
+    [ -f $1 ] && source $1
+}
+
+
+# ghcup
+source_opt "$HOME/.ghcup/env"
+
+# foundry
+export PATH="$HOME/.foundry/bin:$PATH"
 
 # add path to user local tools
 export PATH="$HOME/.local/bin:$PATH"

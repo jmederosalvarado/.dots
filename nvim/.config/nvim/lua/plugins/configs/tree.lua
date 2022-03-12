@@ -1,16 +1,10 @@
 vim.keymap.set("n", "<C-n>", "<cmd>NvimTreeToggle <CR>", { silent = true })
-vim.keymap.set("n", "-", "<cmd>NvimTreeFindFile <CR>", { silent = true })
+-- vim.keymap.set("n", "-", "<cmd>NvimTreeFindFile <CR>", { silent = true })
 
 vim.g.nvim_tree_git_hl = true
 vim.g.nvim_tree_indent_markers = 1
-vim.g.nvim_tree_quit_on_open = 1 -- closes tree when file's opened
 vim.g.nvim_tree_group_empty = 1
 vim.g.nvim_tree_special_files = {}
-
-vim.g.nvim_tree_window_picker_exclude = {
-	filetype = { "notify", "packer", "qf" },
-	buftype = { "terminal" },
-}
 
 vim.g.nvim_tree_icons = {
 	default = "",
@@ -55,11 +49,22 @@ require("nvim-tree").setup({
 		icons = {
 			hint = "",
 			info = "",
-			warning = "",
-			error = "",
+			warning = " ",
+			error = " ",
 		},
 	},
 	git = {
 		ignore = false,
+	},
+	actions = {
+		open_file = {
+			quit_on_open = true,
+			window_picker = {
+				exclude = {
+					filetype = { "notify", "packer", "qf" },
+					buftype = { "terminal" },
+				},
+			},
+		},
 	},
 })
