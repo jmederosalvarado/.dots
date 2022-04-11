@@ -97,6 +97,7 @@ local tabs = {
 lualine.setup({
 	options = {
 		theme = "gruvy",
+		globalstatus = true,
 		-- disabled_filetypes = { "NvimTree" },
 		-- Disable sections and component separators
 		component_separators = "",
