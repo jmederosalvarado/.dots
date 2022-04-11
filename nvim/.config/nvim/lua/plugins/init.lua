@@ -42,6 +42,8 @@ local specs = function(use)
 
 	-- COMPLETION {{{
 
+	use({ "github/copilot.vim" })
+
 	use({
 		"hrsh7th/nvim-cmp",
 		config = use_config("cmp"),
@@ -83,8 +85,13 @@ local specs = function(use)
 
 	use({
 		"nvim-telescope/telescope.nvim",
-		after = "telescope-fzf-native.nvim",
+		after = "telescope-frecency.nvim",
 		requires = {
+			{
+				"nvim-telescope/telescope-frecency.nvim",
+				after = "telescope-fzf-native.nvim",
+				requires = { "tami5/sqlite.lua" },
+			},
 			{ "nvim-telescope/telescope-fzf-native.nvim", run = "make", cond = not_vscode },
 		},
 		config = use_config("telescope"),
@@ -152,6 +159,12 @@ local specs = function(use)
 
 	-- APPEARANCE {{{
 
+	-- use({
+	-- 	"romgrk/nvim-treesitter-context",
+	-- 	config = use_config("treesitter_context"),
+	--        after = "nvim-treesitter",
+	-- })
+
 	use({
 		"kyazdani42/nvim-web-devicons",
 		requires = "lambdalisue/glyph-palette.vim",
@@ -195,6 +208,14 @@ local specs = function(use)
 		"navarasu/onedark.nvim",
 		cond = not_vscode,
 		config = use_config("onedark"),
+	})
+
+	use({
+		"jmederosalvarado/gruvy.nvim",
+		cond = not_vscode,
+		config = function()
+			vim.cmd([[colorscheme gruvy]])
+		end,
 	})
 
 	-- }}}
@@ -269,11 +290,11 @@ local specs = function(use)
 	})
 	use("andymass/vim-matchup")
 	use("wellle/targets.vim")
-	use({
-		"iamcco/markdown-preview.nvim",
-		cond = not_vscode,
-		run = "cd app && yarn install",
-	})
+	-- use({
+		-- "iamcco/markdown-preview.nvim",
+		-- cond = not_vscode,
+		-- run = "cd app && yarn install",
+	-- })
 
 	use({ "tomlion/vim-solidity", cond = not_vscode })
 

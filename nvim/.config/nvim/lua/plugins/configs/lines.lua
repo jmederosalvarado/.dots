@@ -31,11 +31,11 @@ local diff = {
 	"diff",
 	-- symbols = { added = " ", modified = " ", removed = " " },
 	symbols = { added = " ", modified = " ", removed = " " },
-	-- diff_color = {
-	-- 	added = "GitSignsAdd",
-	-- 	modified = "GitSignsChange",
-	-- 	removed = "GitSignsDelete",
-	-- },
+	diff_color = {
+		added = "GitSignsAdd",
+		modified = "GitSignsChange",
+		removed = "GitSignsDelete",
+	},
 	cond = conditions.hide_in_width,
 }
 

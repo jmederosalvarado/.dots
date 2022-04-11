@@ -28,6 +28,10 @@ if not vim.g.vscode then
 	vim.o.termguicolors = true
 	vim.o.bg = "dark"
 
+	-- global statusline
+	vim.o.laststatus = 3
+	vim.cmd("set laststatus=3")
+
 	-- show some invisible characters (e.g. tabs, spaces)
 	vim.o.list = true
 	-- vim.o.listchars = "trail:·,tab:» "
@@ -39,7 +43,8 @@ if not vim.g.vscode then
 	-- fold
 	-- vim.o.foldminlines = 10
 	-- vim.o.foldminlines = 10
-	vim.o.foldmethod = "marker"
+	-- vim.o.foldmethod = "marker"
+	vim.o.foldmethod = "manual"
 end
 
 -- tabs, spaces and indentation

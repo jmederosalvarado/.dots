@@ -1,8 +1,7 @@
 vim.keymap.set("n", "<C-n>", "<cmd>NvimTreeToggle <CR>", { silent = true })
--- vim.keymap.set("n", "-", "<cmd>NvimTreeFindFile <CR>", { silent = true })
+vim.keymap.set("n", "-", require("nvim-tree").open_replacing_current_buffer, { silent = true })
 
 vim.g.nvim_tree_git_hl = true
-vim.g.nvim_tree_indent_markers = 1
 vim.g.nvim_tree_group_empty = 1
 vim.g.nvim_tree_special_files = {}
 
@@ -44,7 +43,7 @@ require("nvim-tree").setup({
 		update_cwd = false,
 	},
 	diagnostics = {
-		enable = true,
+		enable = false,
 		show_on_dirs = true,
 		icons = {
 			hint = "",
@@ -66,5 +65,8 @@ require("nvim-tree").setup({
 				},
 			},
 		},
+	},
+	renderer = {
+		indent_markers = { enable = true },
 	},
 })

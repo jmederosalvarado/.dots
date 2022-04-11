@@ -1,19 +1,34 @@
 # Makefile to install dependecies
 
-packer_path = $(HOME)/.local/share/nvim/site/pack/packer/start/packer.nvim
-zinit_path = $(HOME)/.local/share/zinit/zinit.git
+nvim_packer = $(HOME)/.local/share/nvim/site/pack/packer/start/packer.nvim
+zsh_completions = $(HOME)/.zsh/zsh-completions
+zsh_autosuggestions = $(HOME)/.zsh/zsh-autosuggestions
+zsh_vi_mode = $(HOME)/.zsh/zsh-vi-mode
+zsh_syntax = $(HOME)/.zsh/fast-syntax-highlighting
 
 default:
-	@echo 'make [ packer | zinit ]'
+	@echo 'make [ nvim | zsh ]'
 
 .PHONY: packer
-packer: $(packer_path)
+nvim: $(nvim_packer)
+	stow nvim
 
-$(packer_path):
+$(nvim_packer):
 	git clone --depth 1 https://github.com/wbthomason/packer.nvim $@
 
-.PHONY: zinit
-zinit: $(zinit_path)
+.PHONY: zsh
+zsh: $(zsh_completions) $(zsh_autosuggestions) $(zsh_vi_mode) $(zsh_syntax)
+	stow zsh
+	@echo Install starship using package manager
 
-$(zinit_path):
-	git clone --depth 1 https://github.com/zdharma-continuum/zinit $@
+$(zsh_completions):
+	git clone --depth 1 https://github.com/zsh-users/zsh-completions $@
+	
+$(zsh_autosuggestions):
+	git clone --depth 1 https://github.com/zsh-users/zsh-autosuggestions $@
+
+$(zsh_vi_mode):
+	git clone --depth 1 https://github.com/jeffreytse/zsh-vi-mode $@
+
+$(zsh_syntax):
+	git clone --depth 1 https://github.com/zdharma-continuum/fast-syntax-highlighting $@
