@@ -205,7 +205,7 @@ local specs = function(use)
 	})
 
 	use({
-		"navarasu/onedark.nvim",
+		"ful1e5/onedark.nvim",
 		cond = not_vscode,
 		config = use_config("onedark"),
 	})
@@ -214,7 +214,15 @@ local specs = function(use)
 		"jmederosalvarado/gruvy.nvim",
 		cond = not_vscode,
 		config = function()
-			vim.cmd([[colorscheme gruvy]])
+			vim.cmd([[colorscheme ]] .. vim.g.colors)
+		end,
+	})
+
+	use({
+		"ellisonleao/gruvbox.nvim",
+		cond = not_vscode,
+		config = function()
+			vim.cmd([[colorscheme ]] .. vim.g.colors)
 		end,
 	})
 
@@ -288,12 +296,19 @@ local specs = function(use)
 		"ggandor/lightspeed.nvim",
 		config = use_config("lightspeed"),
 	})
-	use("andymass/vim-matchup")
+	use({
+		"andymass/vim-matchup",
+		setup = function()
+			vim.g.matchup_matchparen_offscreen = {
+				method = "popup",
+			}
+		end,
+	})
 	use("wellle/targets.vim")
 	-- use({
-		-- "iamcco/markdown-preview.nvim",
-		-- cond = not_vscode,
-		-- run = "cd app && yarn install",
+	-- "iamcco/markdown-preview.nvim",
+	-- cond = not_vscode,
+	-- run = "cd app && yarn install",
 	-- })
 
 	use({ "tomlion/vim-solidity", cond = not_vscode })

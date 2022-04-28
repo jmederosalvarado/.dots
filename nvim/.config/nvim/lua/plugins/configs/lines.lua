@@ -16,17 +16,6 @@ local conditions = {
 	end,
 }
 
--- Add components to right sections
-local format = {
-	"fileformat",
-}
-
-local encoding = {
-	"encoding",
-	fmt = string.upper, -- I'm not sure why it's upper case either ;)
-	cond = conditions.hide_in_width,
-}
-
 local diff = {
 	"diff",
 	-- symbols = { added = " ", modified = " ", removed = " " },
@@ -97,6 +86,8 @@ local tabs = {
 lualine.setup({
 	options = {
 		theme = "gruvy",
+		-- theme = "gruvbox",
+		-- theme = "onedark-nvim",
 		globalstatus = true,
 		-- disabled_filetypes = { "NvimTree" },
 		-- Disable sections and component separators
@@ -105,10 +96,10 @@ lualine.setup({
 	},
 	sections = {
 		lualine_a = { mode },
-		lualine_b = { branch, diff },
+		lualine_b = { filetype, filename },
 		lualine_c = { diagnostics },
 		lualine_x = {},
-		lualine_y = { filetype, filename },
+		lualine_y = { diff, branch },
 		lualine_z = { location },
 	},
 	inactive_sections = {

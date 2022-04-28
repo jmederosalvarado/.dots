@@ -5,11 +5,12 @@ zsh_completions = $(HOME)/.zsh/zsh-completions
 zsh_autosuggestions = $(HOME)/.zsh/zsh-autosuggestions
 zsh_vi_mode = $(HOME)/.zsh/zsh-vi-mode
 zsh_syntax = $(HOME)/.zsh/fast-syntax-highlighting
+tmux_tpm = $(HOME)/.tmux/plugins/tpm
 
 default:
-	@echo 'make [ nvim | zsh ]'
+	@echo 'make [ nvim | zsh | tmux ]'
 
-.PHONY: packer
+.PHONY: nvim
 nvim: $(nvim_packer)
 	stow nvim
 
@@ -32,3 +33,10 @@ $(zsh_vi_mode):
 
 $(zsh_syntax):
 	git clone --depth 1 https://github.com/zdharma-continuum/fast-syntax-highlighting $@
+
+.PHONY: tmux
+tmux: $(tmux_tpm)
+	stow tmux
+
+$(tmux_tpm):
+	git clone --depth 1 https://github.com/tmux-plugins/tpm $@

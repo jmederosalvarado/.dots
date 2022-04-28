@@ -116,58 +116,58 @@ function zvm_after_init {
     zvm_define_widget rationalise_dot
     zvm_bindkey viins "." rationalise_dot
 
-    # [Home] - Go to beginning of line
-    zvm_bindkey viins "$terminfo[khome]" beginning-of-line
-    # [End] - Go to end of line
-    zvm_bindkey viins "$terminfo[kend]" end-of-line
+    # # [Home] - Go to beginning of line
+    # zvm_bindkey viins "$terminfo[khome]" beginning-of-line
+    # # [End] - Go to end of line
+    # zvm_bindkey viins "$terminfo[kend]" end-of-line
 
-    # [Shift-Tab] - move through the completion menu backwards
-    zvm_bindkey viins "$terminfo[kcbt]" reverse-menu-complete
+    # # [Shift-Tab] - move through the completion menu backwards
+    # zvm_bindkey viins "$terminfo[kcbt]" reverse-menu-complete
 
-    # [Delete] - delete forward
-    zvm_bindkey viins "^[[3~" delete-char
+    # # [Delete] - delete forward
+    # zvm_bindkey viins "^[[3~" delete-char
 
-    # [Ctrl-Delete] - delete whole forward-word
-    zvm_bindkey viins '^[[3;5~' kill-word
+    # # [Ctrl-Delete] - delete whole forward-word
+    # zvm_bindkey viins '^[[3;5~' kill-word
 
-    # [Ctrl-RightArrow] - move forward one word
-    zvm_bindkey viins '^[[1;5C' forward-word
-    # [Ctrl-LeftArrow] - move backward one word
-    zvm_bindkey viins '^[[1;5D' backward-word
+    # # [Ctrl-RightArrow] - move forward one word
+    # zvm_bindkey viins '^[[1;5C' forward-word
+    # # [Ctrl-LeftArrow] - move backward one word
+    # zvm_bindkey viins '^[[1;5D' backward-word
 
-    # [UpArrow] - Search history backwards
-    zvm_bindkey viins "$terminfo[kcuu1]" up-line-or-beginning-search
-    # [DownArrow] - Search history forward
-    zvm_bindkey viins "$terminfo[kcud1]" down-line-or-beginning-search
+    # # [UpArrow] - Search history backwards
+    # zvm_bindkey viins "$terminfo[kcuu1]" up-line-or-beginning-search
+    # # [DownArrow] - Search history forward
+    # zvm_bindkey viins "$terminfo[kcud1]" down-line-or-beginning-search
 
     zvm_bindkey viins '^P' up-line-or-beginning-search
     zvm_bindkey viins '^N' down-line-or-beginning-search
 }
 
 function zvm_after_lazy_keybindings {
-    # [Home] - Go to beginning of line
-    zvm_bindkey vicmd "$terminfo[khome]" beginning-of-line
-    # [End] - Go to end of line
-    zvm_bindkey vicmd "$terminfo[kend]" end-of-line
+    # # [Home] - Go to beginning of line
+    # zvm_bindkey vicmd "$terminfo[khome]" beginning-of-line
+    # # [End] - Go to end of line
+    # zvm_bindkey vicmd "$terminfo[kend]" end-of-line
 
-    # [Shift-Tab] - move through the completion menu backwards
-    zvm_bindkey vicmd "$terminfo[kcbt]" reverse-menu-complete
+    # # [Shift-Tab] - move through the completion menu backwards
+    # zvm_bindkey vicmd "$terminfo[kcbt]" reverse-menu-complete
 
-    # [Delete] - delete forward
-    zvm_bindkey vicmd "^[[3~" delete-char
+    # # [Delete] - delete forward
+    # zvm_bindkey vicmd "^[[3~" delete-char
 
-    # [Ctrl-Delete] - delete whole forward-word
-    zvm_bindkey vicmd '^[[3;5~' kill-word
+    # # [Ctrl-Delete] - delete whole forward-word
+    # zvm_bindkey vicmd '^[[3;5~' kill-word
 
-    # [Ctrl-RightArrow] - move forward one word
-    zvm_bindkey vicmd '^[[1;5C' forward-word
-    # [Ctrl-LeftArrow] - move backward one word
-    zvm_bindkey vicmd '^[[1;5D' backward-word
+    # # [Ctrl-RightArrow] - move forward one word
+    # zvm_bindkey vicmd '^[[1;5C' forward-word
+    # # [Ctrl-LeftArrow] - move backward one word
+    # zvm_bindkey vicmd '^[[1;5D' backward-word
 
-    # [UpArrow] - Search history backwards
-    zvm_bindkey vicmd "$terminfo[kcuu1]" up-line-or-beginning-search
-    # [DownArrow] - Search history forward
-    zvm_bindkey vicmd "$terminfo[kcud1]" down-line-or-beginning-search
+    # # [UpArrow] - Search history backwards
+    # zvm_bindkey vicmd "$terminfo[kcuu1]" up-line-or-beginning-search
+    # # [DownArrow] - Search history forward
+    # zvm_bindkey vicmd "$terminfo[kcud1]" down-line-or-beginning-search
 
     zvm_bindkey viins '^P' up-line-or-beginning-search
     zvm_bindkey viins '^N' down-line-or-beginning-search
@@ -204,9 +204,18 @@ eval "$(starship init zsh)"
 
 export EDITOR="nvim" VISUAL="nvim"
 
+export NVM_DIR="$HOME/.nvm"
+
 if has_brew; then
     # use gnu coreutils by default
     export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
+
+    [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+    [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
 fi
+
+# Setup rust
+source "$HOME/.cargo/env"
 
 # }}}
