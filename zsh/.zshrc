@@ -216,6 +216,19 @@ if has_brew; then
 fi
 
 # Setup rust
-source "$HOME/.cargo/env"
+if [ -f "$HOME/.cargo/env" ]; then
+    source "$HOME/.cargo/env"
+    export PATH="$HOME/.cargo/bin:$PATH"
+fi
+
+export PATH="$HOME/.bin/go/bin:$PATH"
+# Setup go
+if [ -d "$HOME/.go" ]; then
+    export PATH="$HOME/.go/bin:$PATH"
+fi
 
 # }}}
+#
+export DYLD_LIBRARY_PATH="/opt/homebrew/lib"
+
+export PATH="$PATH:$HOME/.foundry/bin"

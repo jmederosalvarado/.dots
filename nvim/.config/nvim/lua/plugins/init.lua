@@ -85,13 +85,8 @@ local specs = function(use)
 
 	use({
 		"nvim-telescope/telescope.nvim",
-		after = "telescope-frecency.nvim",
+		after = "telescope-fzf-native.nvim",
 		requires = {
-			{
-				"nvim-telescope/telescope-frecency.nvim",
-				after = "telescope-fzf-native.nvim",
-				requires = { "tami5/sqlite.lua" },
-			},
 			{ "nvim-telescope/telescope-fzf-native.nvim", run = "make", cond = not_vscode },
 		},
 		config = use_config("telescope"),
@@ -214,15 +209,7 @@ local specs = function(use)
 		"jmederosalvarado/gruvy.nvim",
 		cond = not_vscode,
 		config = function()
-			vim.cmd([[colorscheme ]] .. vim.g.colors)
-		end,
-	})
-
-	use({
-		"ellisonleao/gruvbox.nvim",
-		cond = not_vscode,
-		config = function()
-			vim.cmd([[colorscheme ]] .. vim.g.colors)
+			vim.cmd("colorscheme gruvy")
 		end,
 	})
 

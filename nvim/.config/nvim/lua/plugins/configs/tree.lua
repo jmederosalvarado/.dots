@@ -1,40 +1,12 @@
 vim.keymap.set("n", "<C-n>", "<cmd>NvimTreeToggle <CR>", { silent = true })
 vim.keymap.set("n", "-", require("nvim-tree").open_replacing_current_buffer, { silent = true })
 
-vim.g.nvim_tree_git_hl = true
-vim.g.nvim_tree_group_empty = 1
-vim.g.nvim_tree_special_files = {}
-
-vim.g.nvim_tree_icons = {
-	default = "",
-	symlink = "",
-	git = {
-		ignored = "",
-		unstaged = "!",
-		staged = "+",
-		unmerged = "",
-		renamed = "»",
-		untracked = "?",
-		deleted = "✗",
-	},
-	folder = {
-		default = "",
-		empty = "",
-		symlink = "",
-
-		open = "",
-		empty_open = "",
-		symlink_open = "",
-	},
-}
-
 require("nvim-tree").setup({
 	ignore_ft_on_setup = { "dashboard" },
 	filters = {
 		dotfiles = false,
-		custom = { ".git", "node_modules" },
+		custom = { "^.git$", "^node_modules$" },
 	},
-	auto_close = false,
 	open_on_tab = false,
 	hijack_cursor = false,
 	update_cwd = true,
@@ -68,5 +40,35 @@ require("nvim-tree").setup({
 	},
 	renderer = {
 		indent_markers = { enable = true },
+		highlight_git = true,
+		special_files = {},
+		icons = {
+			show = {
+				file = true,
+				folder = true,
+				folder_arrow = true,
+				git = true,
+			},
+			glyphs = {
+				git = {
+					ignored = "",
+					unstaged = "!",
+					staged = "+",
+					unmerged = "",
+					renamed = "»",
+					untracked = "?",
+					deleted = "✗",
+				},
+				folder = {
+					default = "",
+					empty = "",
+					symlink = "",
+
+					open = "",
+					empty_open = "",
+					symlink_open = "",
+				},
+			},
+		},
 	},
 })

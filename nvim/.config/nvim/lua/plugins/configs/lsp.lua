@@ -26,10 +26,10 @@ local default_on_attach = function(client, bufnr)
 
 	local disable_formatting = { "pyright", "sumneko_lua" }
 	if vim.tbl_contains(disable_formatting, client.name) then
-		client.resolved_capabilities.document_formatting = false
+		client.server_capabilities.documentFormattingProvider = false
 	end
 
-	if client.resolved_capabilities.document_formatting then
+	if client.server_capabilities.documentFormattingProvider then
 		map("<leader>fm", ":lua vim.lsp.buf.formatting_sync()<CR>")
 		vim.cmd([[
             augroup LspFormatting
@@ -87,6 +87,20 @@ server_setups["rust-analyzer"] = {
 
 -- }}}
 
+-- Go {{{
+
+server_setups["gopls"] = {
+	on_attach = default_on_attach,
+	settings = {
+		gopls = {
+			-- use gofumpt
+			gofumpt = true,
+		},
+	},
+}
+
+-- }}}
+
 -- Typescript & Javascript {{{
 
 server_setups["tsserver"] = {
@@ -131,7 +145,7 @@ server_setups["tsserver"] = {
 			watch_dir = nil,
 		})
 
-		client.resolved_capabilities.document_formatting = false
+		client.server_capabilities.document_formatting = false
 		-- required to fix code action ranges
 		ts_utils.setup_client(client)
 	end,
