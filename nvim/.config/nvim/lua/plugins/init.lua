@@ -8,89 +8,91 @@ end
 
 local not_vscode = [[not vim.g.vscode]]
 
+local build_group_use = function(use, group)
+	return function(spec)
+		if type(spec) == "string" then
+			spec = { spec }
+		end
+		use(vim.tbl_extend("keep", spec, {
+			config = use_config(group),
+		}))
+	end
+end
+
 local specs = function(use)
 	use("nvim-lua/plenary.nvim")
 
-	-- LSP {{{
-
-	use({
-		"neovim/nvim-lspconfig",
-		config = use_config("lsp"),
-		after = {
-			"nvim-lsp-installer",
-			"lua-dev.nvim",
-			"null-ls.nvim",
-			"nvim-lsp-ts-utils",
-			"trouble.nvim",
-			-- "lsp_signature.nvim",
-		},
-		requires = {
-			{ "williamboman/nvim-lsp-installer", cond = not_vscode },
-			{ "folke/lua-dev.nvim", cond = not_vscode },
-			{ "jose-elias-alvarez/null-ls.nvim", cond = not_vscode },
-			{ "jose-elias-alvarez/nvim-lsp-ts-utils", cond = not_vscode },
-			{ "folke/trouble.nvim", cond = not_vscode },
-			-- {
-			-- 	"ray-x/lsp_signature.nvim",
-			-- 	cond = not_vscode,
-			-- 	config = use_config("lsp_signature"),
-			-- },
-		},
-	})
-
-	-- }}}
+	-- use({ "github/copilot.vim" })
 
 	-- COMPLETION {{{
 
-	use({ "github/copilot.vim" })
+	local use_completion = build_group_use(use, "completion")
+
+	-- main completion plugin
+	use_completion("hrsh7th/nvim-cmp")
+
+	-- autocomplete pairs
+	use_completion("windwp/nvim-autopairs")
+
+	-- snippets
+	use_completion("rafamadriz/friendly-snippets")
+	use_completion("L3MON4D3/LuaSnip")
+
+	-- cmp sources
+	use_completion("saadparwaiz1/cmp_luasnip")
+	use_completion("hrsh7th/cmp-nvim-lua")
+	use_completion("hrsh7th/cmp-nvim-lsp")
+	use_completion("petertriho/cmp-git")
+	use_completion("hrsh7th/cmp-nvim-lsp-signature-help")
+	use_completion("hrsh7th/cmp-buffer")
+	use_completion("hrsh7th/cmp-path")
+	use_completion("hrsh7th/cmp-cmdline")
+
+	-- }}}
+
+	-- LSP {{{
+
+	local use_lsp = build_group_use(use, "lsp")
+
+	use_lsp("neovim/nvim-lspconfig")
+	use_lsp("williamboman/nvim-lsp-installer")
+	use_lsp("folke/lua-dev.nvim")
+	use_lsp("jose-elias-alvarez/null-ls.nvim")
+	use_lsp("jose-elias-alvarez/nvim-lsp-ts-utils")
+	use_lsp("folke/trouble.nvim")
 
 	use({
-		"hrsh7th/nvim-cmp",
-		config = use_config("cmp"),
-		after = {
-			"nvim-autopairs",
-
-			"friendly-snippets",
-			"LuaSnip",
-		},
-		requires = {
-			{ "windwp/nvim-autopairs", cond = not_vscode },
-
-			{ "rafamadriz/friendly-snippets", cond = not_vscode },
-			{ "L3MON4D3/LuaSnip", cond = not_vscode },
-
-			{ "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
-			{ "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
-			{ "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" },
-			{ "hrsh7th/cmp-nvim-lsp-signature-help", after = "nvim-cmp" },
-			{ "hrsh7th/cmp-buffer", after = "nvim-cmp" },
-			{ "hrsh7th/cmp-path", after = "nvim-cmp" },
-			{ "hrsh7th/cmp-cmdline", after = "nvim-cmp" },
-		},
+		"j-hui/fidget.nvim",
+		config = function()
+			require("fidget").setup({
+				window = {
+					-- relative = "win",
+					relative = "editor",
+					blend = 0,
+				},
+			})
+		end,
 	})
+
+	use({ "ray-x/lsp_signature.nvim", config = use_config("lsp_signature") })
 
 	-- }}}
 
 	-- TREESITTER {{{
 
-	use({
-		"nvim-treesitter/nvim-treesitter",
-		cond = not_vscode,
-		config = use_config("treesitter"),
-	})
+	local use_treesitter = build_group_use(use, "treesitter")
+
+	use_treesitter("nvim-treesitter/nvim-treesitter")
+	use_treesitter("nvim-treesitter/nvim-treesitter-context")
 
 	-- }}}
 
 	-- NAVIGATION {{{
 
-	use({
-		"nvim-telescope/telescope.nvim",
-		after = "telescope-fzf-native.nvim",
-		requires = {
-			{ "nvim-telescope/telescope-fzf-native.nvim", run = "make", cond = not_vscode },
-		},
-		config = use_config("telescope"),
-	})
+	local use_telescope = build_group_use(use, "telescope")
+
+	use_telescope("nvim-telescope/telescope.nvim")
+	use_telescope({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 
 	use({
 		"ThePrimeagen/harpoon",
@@ -103,7 +105,6 @@ local specs = function(use)
 
 	use({
 		"tpope/vim-fugitive",
-		cond = not_vscode,
 		config = function()
 			vim.keymap.set("n", "<leader>gs", "<cmd>G<CR>", { silent = true })
 			vim.keymap.set("n", "<leader>gf", "<cmd>diffget //2<CR>", { silent = true })
@@ -113,52 +114,40 @@ local specs = function(use)
 
 	use({
 		"lewis6991/gitsigns.nvim",
-		cond = not_vscode,
 		config = use_config("gitsigns"),
 	})
 
 	use({
 		"TimUntersberger/neogit",
-		cond = not_vscode,
 		config = use_setup("neogit"),
 		requires = "nvim-lua/plenary.nvim",
 	})
 
 	use({
+		"akinsho/git-conflict.nvim",
+		tag = "*",
+		config = use_setup("git-conflict"),
+	})
+
+	use({
 		"sindrets/diffview.nvim",
-		cond = not_vscode,
 		config = use_setup("diffview"),
 		requires = "nvim-lua/plenary.nvim",
 	})
 
 	use({
 		"ThePrimeagen/git-worktree.nvim",
-		-- cond = not_vscode, -- TODO this is breaking telescope
 		config = use_setup("git-worktree"),
 	})
 
-	--   use({
-	--       "rhysd/conflict-marker.vim",
-	-- cond = not_vscode,
-	--       setup = use_config("conflict_marker_setup"),
-	--       config = use_config("conflict_marker_config")
-	--   })
-
 	use({
 		"pwntester/octo.nvim",
-		cond = not_vscode,
 		config = use_setup("octo"),
 	})
 
 	-- }}}
 
 	-- APPEARANCE {{{
-
-	-- use({
-	-- 	"romgrk/nvim-treesitter-context",
-	-- 	config = use_config("treesitter_context"),
-	--        after = "nvim-treesitter",
-	-- })
 
 	use({
 		"kyazdani42/nvim-web-devicons",
@@ -168,48 +157,122 @@ local specs = function(use)
 
 	use({
 		"nvim-lualine/lualine.nvim",
-		cond = not_vscode,
 		requires = "nvim-web-devicons",
 		config = use_config("lines"),
 	})
 
 	use({
-		"akinsho/bufferline.nvim",
-		cond = not_vscode,
-		requires = "famiu/bufdelete.nvim",
-		config = use_config("bufferline"),
-		disable = true,
-	})
-
-	use({
-		"romgrk/barbar.nvim",
-		cond = not_vscode,
-		disable = true,
-	})
-
-	use({
 		"lukas-reineke/indent-blankline.nvim",
-		cond = not_vscode,
 		config = use_config("indent_blankline"),
 	})
 
 	use({
-		"folke/tokyonight.nvim",
-		cond = not_vscode,
-		config = use_config("tokyonight"),
-	})
-
-	use({
-		"ful1e5/onedark.nvim",
-		cond = not_vscode,
-		config = use_config("onedark"),
-	})
-
-	use({
-		"jmederosalvarado/gruvy.nvim",
-		cond = not_vscode,
+		"rcarriga/nvim-notify",
 		config = function()
-			vim.cmd("colorscheme gruvy")
+			vim.notify = require("notify")
+		end,
+	})
+
+	-- use({
+	-- 	"JASONews/glow-hover.nvim",
+	-- 	config = use_config("glow_hover"),
+	-- })
+
+	-- use({
+	-- 	"jmederosalvarado/gruvy.nvim",
+	-- 	config = function()
+	-- 		vim.cmd("colorscheme gruvy")
+	-- 	end,
+	-- })
+
+	use({
+		"catppuccin/nvim",
+		as = "catppuccin",
+		config = function()
+			vim.g.catppuccin_flavour = "frappe"
+			require("catppuccin").setup({
+				transparent_background = false,
+				term_colors = true,
+				compile = {
+					enabled = false,
+					path = vim.fn.stdpath("cache") .. "/catppuccin",
+				},
+				dim_inactive = {
+					enabled = false,
+					shade = "dark",
+					percentage = 0.15,
+				},
+				styles = {
+					comments = { "italic" },
+					conditionals = { "italic" },
+					loops = {},
+					functions = {},
+					keywords = {},
+					strings = {},
+					variables = {},
+					numbers = {},
+					booleans = {},
+					properties = {},
+					types = {},
+					operators = {},
+				},
+				integrations = {
+					treesitter = true,
+					treesitter_context = true,
+					cmp = true,
+					gitsigns = true,
+					telescope = true,
+					nvimtree = true,
+					markdown = true,
+					notify = true,
+					neogit = true,
+					lightspeed = true,
+					lsp_trouble = true,
+					indent_blankline = {
+						enabled = true,
+						colored_indent_levels = false,
+					},
+					native_lsp = {
+						enabled = true,
+						virtual_text = {
+							errors = { "italic" },
+							hints = { "italic" },
+							warnings = { "italic" },
+							information = { "italic" },
+						},
+						underlines = {
+							errors = { "underline" },
+							hints = { "underline" },
+							warnings = { "underline" },
+							information = { "underline" },
+						},
+					},
+				},
+				color_overrides = {},
+				highlight_overrides = {},
+			})
+			vim.cmd("colorscheme catppuccin")
+		end,
+	})
+
+	use({
+		"ellisonleao/gruvbox.nvim",
+		config = function()
+			require("gruvbox").setup({
+				undercurl = true,
+				underline = true,
+				bold = true,
+				italic = true,
+				strikethrough = true,
+				invert_selection = false,
+				invert_signs = false,
+				invert_tabline = false,
+				invert_intend_guides = false,
+				inverse = true, -- invert background for search, diffs, statuslines and errors
+				contrast = "", -- can be "hard", "soft" or empty string
+				overrides = {},
+			})
+			-- vim.cmd("colorscheme gruvbox")
 		end,
 	})
 
@@ -219,37 +282,17 @@ local specs = function(use)
 
 	use({
 		"kyazdani42/nvim-tree.lua",
-		cond = not_vscode,
 		config = use_config("tree"),
 	})
 
 	use({
 		"numToStr/Comment.nvim",
-		cond = not_vscode,
 		config = use_setup("Comment"),
 	})
 
 	use({
 		"karb94/neoscroll.nvim",
-		cond = not_vscode,
 		config = use_setup("neoscroll"),
-	})
-
-	use({
-		"max397574/better-escape.nvim",
-		config = function()
-			require("better_escape").setup({
-				mapping = "jk",
-				timeout = 200,
-			})
-		end,
-	})
-
-	use({
-		"akinsho/toggleterm.nvim",
-		cond = not_vscode,
-		config = use_config("toggleterm"),
-		disable = true,
 	})
 
 	use({
@@ -260,21 +303,22 @@ local specs = function(use)
 
 	use("norcalli/nvim-colorizer.lua")
 
+	use("gpanders/editorconfig.nvim")
 	use("tpope/vim-surround")
 	use("tpope/vim-repeat")
 	use("tpope/vim-eunuch")
 	use("tpope/vim-unimpaired")
 	use("tpope/vim-abolish")
 	-- use("tpope/vim-sleuth")
-	-- use("tpope/vim-obsession")
+	use("tpope/vim-obsession")
 	use({
 		"rmagatti/auto-session",
-		cond = not_vscode,
 		setup = function()
 			vim.o.sessionoptions = vim.o.sessionoptions .. ",winpos,terminal"
 		end,
 		config = function()
 			require("auto-session").setup({
+				log_level = "error",
 				pre_save_cmds = { "tabdo NvimTreeClose" },
 			})
 		end,
@@ -294,17 +338,10 @@ local specs = function(use)
 	use("wellle/targets.vim")
 	-- use({
 	-- "iamcco/markdown-preview.nvim",
-	-- cond = not_vscode,
 	-- run = "cd app && yarn install",
 	-- })
 
-	use({ "tomlion/vim-solidity", cond = not_vscode })
-
-	use({
-		"untitled-ai/jupyter_ascending.vim",
-		cond = not_vscode,
-		config = use_config("jupyter"),
-	})
+	use({ "tomlion/vim-solidity" })
 
 	-- }}}
 end

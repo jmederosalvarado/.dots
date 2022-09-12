@@ -20,11 +20,11 @@ local diff = {
 	"diff",
 	-- symbols = { added = " ", modified = " ", removed = " " },
 	symbols = { added = " ", modified = " ", removed = " " },
-	diff_color = {
-		added = "GitSignsAdd",
-		modified = "GitSignsChange",
-		removed = "GitSignsDelete",
-	},
+	-- diff_color = {
+	-- 	added = "GitSignsAdd",
+	-- 	modified = "GitSignsChange",
+	-- 	removed = "GitSignsDelete",
+	-- },
 	cond = conditions.hide_in_width,
 }
 
@@ -59,7 +59,8 @@ local diagnostics = {
 	sources = { "nvim_diagnostic" },
 	update_in_insert = true,
 	sections = { "error", "warn", "info" },
-	symbols = { error = " ", warn = " ", info = " " },
+	symbols = { error = " ", warn = " ", info = " " },
+	-- symbols = { error = " ", warn = " ", info = " " },
 	-- symbols = { error = " ", warn = " ", info = " " },
 	-- diagnostics_color = {
 	-- 	color_error = "DiagnosticSignError",
@@ -76,23 +77,34 @@ local tabs = {
 	-- It can also be a function that returns
 	-- the value of `max_length` dynamically.
 
-	mode = 2,
+	mode = 0,
 	-- 0: Shows tab_nr
 	-- 1: Shows tab_name
 	-- 2: Shows tab_nr + tab_name
 }
 
--- lualine.setup(config)
+local buffers = { "buffers" }
+
 lualine.setup({
 	options = {
-		theme = "gruvy",
-		-- theme = "gruvbox",
-		-- theme = "onedark-nvim",
-		globalstatus = true,
-		-- disabled_filetypes = { "NvimTree" },
-		-- Disable sections and component separators
-		component_separators = "",
-		section_separators = "",
+		icons_enabled = true,
+		theme = "auto",
+		section_separators = { left = "", right = "" },
+		component_separators = { left = "", right = "" },
+		-- section_separators = { left = "", right = "" },
+		-- component_separators = { left = "", right = "" },
+		disabled_filetypes = {
+			statusline = {},
+			winbar = { "NvimTree" },
+		},
+		ignore_focus = {},
+		always_divide_middle = true,
+		globalstatus = false,
+		refresh = {
+			statusline = 1000,
+			tabline = 1000,
+			winbar = 1000,
+		},
 	},
 	sections = {
 		lualine_a = { mode },
@@ -103,12 +115,28 @@ lualine.setup({
 		lualine_z = { location },
 	},
 	inactive_sections = {
-		lualine_a = { filetype, filename },
+		lualine_a = {},
 		lualine_b = {},
+		lualine_c = { filetype, filename },
+		lualine_x = {},
 		lualine_y = {},
 		lualine_z = {},
+	},
+	winbar = {
+		lualine_a = {},
+		lualine_b = {},
 		lualine_c = {},
 		lualine_x = {},
+		lualine_y = {},
+		lualine_z = {},
+	},
+	inactive_winbar = {
+		lualine_a = {},
+		lualine_b = {},
+		lualine_c = {},
+		lualine_x = {},
+		lualine_y = {},
+		lualine_z = {},
 	},
 	tabline = {
 		lualine_a = {},

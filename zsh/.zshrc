@@ -191,18 +191,10 @@ alias ll='ls -lh'
 
 # }}}
 
-# PROMPT {{{
-
-source "$HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
-source "$HOME/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
-
-eval "$(starship init zsh)"
-
-# }}}
-
 # TOOLS {{{
 
 export EDITOR="nvim" VISUAL="nvim"
+export ANSIBLE_VAULT_PASSWORD_FILE="./.vault_pass"
 
 export NVM_DIR="$HOME/.nvm"
 
@@ -216,19 +208,31 @@ if has_brew; then
 fi
 
 # Setup rust
-if [ -f "$HOME/.cargo/env" ]; then
-    source "$HOME/.cargo/env"
-    export PATH="$HOME/.cargo/bin:$PATH"
-fi
+source "$HOME/.cargo/env"
+export PATH="$HOME/.cargo/bin:$PATH"
 
-export PATH="$HOME/.bin/go/bin:$PATH"
 # Setup go
-if [ -d "$HOME/.go" ]; then
-    export PATH="$HOME/.go/bin:$PATH"
-fi
+export PATH="$HOME/.bin/go/bin:$PATH"
+export PATH="$HOME/.go/bin:$PATH"
+
+# Setup pyenv and pyenv-virtualenv
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+# Setup foundry
+export PATH="$PATH:$HOME/.foundry/bin"
 
 # }}}
-#
-export DYLD_LIBRARY_PATH="/opt/homebrew/lib"
 
-export PATH="$PATH:$HOME/.foundry/bin"
+# export DYLD_LIBRARY_PATH="/opt/homebrew/lib"
+
+eval "$('conda' 'shell.zsh' 'hook' 2> /dev/null)"
+
+# PROMPT {{{
+
+source "$HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
+source "$HOME/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
+
+eval "$(starship init zsh)"
+
+# }}}

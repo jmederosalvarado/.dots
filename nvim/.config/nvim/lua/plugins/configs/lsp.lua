@@ -1,3 +1,5 @@
+require("nvim-lsp-installer").setup()
+
 local default_on_attach = function(client, bufnr)
 	local map = function(lhs, rhs)
 		vim.keymap.set("n", lhs, rhs, { buffer = bufnr, silent = true })
@@ -30,11 +32,11 @@ local default_on_attach = function(client, bufnr)
 	end
 
 	if client.server_capabilities.documentFormattingProvider then
-		map("<leader>fm", ":lua vim.lsp.buf.formatting_sync()<CR>")
+		map("<leader>fm", ":lua vim.lsp.buf.format()<CR>")
 		vim.cmd([[
             augroup LspFormatting
                 autocmd! * <buffer>
-                autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
+                autocmd BufWritePre <buffer> lua vim.lsp.buf.format()
             augroup END
         ]])
 	end
@@ -94,8 +96,23 @@ server_setups["gopls"] = {
 	settings = {
 		gopls = {
 			-- use gofumpt
-			gofumpt = true,
+			gofumpt = false,
 		},
+	},
+}
+
+-- }}}
+
+-- Omnisharp {{{
+
+server_setups["omnisharp"] = {
+	on_attach = default_on_attach,
+	settings = {
+		["omnisharp.loggingLevel"] = "debug",
+		["omnisharp.organizeImportsOnFormat"] = true,
+		["omnisharp.useModernNet"] = true,
+		["omnisharp.enableEditorConfigSupport"] = true,
+		["omnisharp.enableRoslynAnalyzers"] = true,
 	},
 }
 
@@ -158,10 +175,11 @@ server_setups["tsserver"] = {
 local nls = require("null-ls")
 nls.setup({
 	sources = {
+		-- nls.builtins.diagnostics.staticcheck,
 		nls.builtins.formatting.black,
-		nls.builtins.formatting.isort.with({
-			args = { "--stdout", "--profile", "black", "-" },
-		}),
+		-- nls.builtins.formatting.isort.with({
+		-- 	args = { "--stdout", "--profile", "black", "-" },
+		-- }),
 		nls.builtins.formatting.stylua,
 		nls.builtins.formatting.prettierd,
 		nls.builtins.formatting.nixfmt,
@@ -177,15 +195,12 @@ nls.setup({
 
 -- }}}
 
-local lspinstaller = require("nvim-lsp-installer")
-
-lspinstaller.on_server_ready(function(server)
+for _, server in ipairs(require("nvim-lsp-installer").get_installed_servers()) do
 	local server_setup = server_setups[server.name] or server_setups["default"]
 	local config = type(server_setup) == "function" and server_setup() or server_setup
-	config.capabilities = require("cmp_nvim_lsp").update_capabilities(
-		config.capabilities or vim.lsp.protocol.make_client_capabilities()
-	)
-	server:setup(config)
-end)
+	config.capabilities =
+		require("cmp_nvim_lsp").update_capabilities(config.capabilities or vim.lsp.protocol.make_client_capabilities())
+	require("lspconfig")[server.name].setup(config)
+end
 
--- vim.lsp.set_log_level(vim.lsp.log_levels.INFO)
+-- vim.lsp.set_log_level("DEBUG")

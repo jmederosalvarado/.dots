@@ -45,7 +45,7 @@ require("nvim-tree").setup({
 		icons = {
 			show = {
 				file = true,
-				folder = true,
+				folder = false,
 				folder_arrow = true,
 				git = true,
 			},
@@ -58,15 +58,6 @@ require("nvim-tree").setup({
 					renamed = "»",
 					untracked = "?",
 					deleted = "✗",
-				},
-				folder = {
-					default = "",
-					empty = "",
-					symlink = "",
-
-					open = "",
-					empty_open = "",
-					symlink_open = "",
 				},
 			},
 		},

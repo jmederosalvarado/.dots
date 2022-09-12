@@ -94,6 +94,7 @@ cmp.setup({
 	sources = {
 		{ name = "nvim_lsp" },
 		{ name = "nvim_lsp_signature_help" },
+		{ name = "git" },
 		{ name = "luasnip" },
 		{ name = "buffer", max_item_count = 5 },
 		-- { name = "nvim_lua" }, -- use lua lsp instead
@@ -102,6 +103,15 @@ cmp.setup({
 	experimental = {
 		ghost_text = true,
 	},
+})
+
+-- Set configuration for gitcommit
+cmp.setup.filetype("gitcommit", {
+	sources = cmp.config.sources({
+		{ name = "cmp_git" },
+	}, {
+		{ name = "buffer" },
+	}),
 })
 
 -- cmp.setup.cmdline("/", {

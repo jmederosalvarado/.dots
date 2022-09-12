@@ -26,6 +26,7 @@ config_fns.indent_blankline = function()
 			"lsp-installer",
 			"TelescopePrompt",
 			"TelescopeResults",
+			"NvimTree",
 		},
 		show_current_context = true,
 		buftype_exclude = { "terminal" },
@@ -46,29 +47,6 @@ end
 
 config_fns.icons = function()
 	require("nvim-web-devicons").setup({ default = true })
-end
-
-config_fns.conflict_marker_setup = function()
-	vim.cmd([[
-    " disable the default highlight group
-    " let g:conflict_marker_highlight_group = 'ConflictMarker'
-    let g:conflict_marker_highlight_group = ''
-
-    " disable default mappings
-    let g:conflict_marker_enable_mappings = 0
-
-    " Include text after begin and end markers
-    let g:conflict_marker_begin = '^<<<<<<< .*$'
-    let g:conflict_marker_end   = '^>>>>>>> .*$'
-    ]])
-end
-
-config_fns.conflict_marker_config = function()
-	vim.keymap.set({ "n" }, "<leader>ho", ":ConflictMarkerOurs<CR>", { silent = true })
-	vim.keymap.set({ "n" }, "<leader>ht", ":ConflictMarkerThemselves<CR>", { silent = true })
-	vim.keymap.set({ "n" }, "<leader>hb", ":ConflictMarkerBoth<CR>", { silent = true })
-	vim.keymap.set({ "n" }, "]x", ":ConflictMarkerNextHunk<CR>", { silent = true })
-	vim.keymap.set({ "n" }, "[x", ":ConflictMarkerPrevHunk<CR>", { silent = true })
 end
 
 config_fns.gitsigns = function()
@@ -106,51 +84,9 @@ config_fns.gitsigns = function()
 	})
 end
 
-config_fns.jupyter = function() end
-
-config_fns.tokyonight = function() end
-config_fns.onedark = function()
-	-- require("onedark").setup({})
-end
-
 config_fns.lightspeed = function()
 	require("lightspeed").setup({
 		-- ignore_case = true,
-	})
-end
-
-config_fns.treesitter_context = function()
-	require("treesitter-context").setup({
-		enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-		throttle = true, -- Throttles plugin updates (may improve performance)
-		max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
-		patterns = { -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
-			-- For all filetypes
-			-- Note that setting an entry here replaces all other patterns for this entry.
-			-- By setting the 'default' entry below, you can control which nodes you want to
-			-- appear in the context window.
-			default = {
-				"class",
-				"function",
-				"method",
-				"for",
-				"while",
-				"if",
-				"switch",
-				"case",
-			},
-			-- Example for a specific filetype.
-			-- If a pattern is missing, *open a PR* so everyone can benefit.
-			--   rust = {
-			--       'impl_item',
-			--   },
-		},
-		exact_patterns = {
-			-- Example for a specific filetype with Lua patterns
-			-- Treat patterns.rust as a Lua pattern (i.e "^impl_item$" will
-			-- exactly match "impl_item" only)
-			-- rust = true,
-		},
 	})
 end
 

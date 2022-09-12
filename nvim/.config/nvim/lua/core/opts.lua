@@ -11,8 +11,8 @@ if not vim.g.vscode then
 	vim.o.mouse = "a"
 
 	-- number and sign column
-	vim.o.number = true
 	vim.o.numberwidth = 2
+	vim.o.number = true
 	vim.o.relativenumber = true
 	vim.o.signcolumn = "yes"
 

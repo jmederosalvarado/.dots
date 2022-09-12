@@ -25,6 +25,11 @@ vim.keymap.set(
 	{ silent = true }
 )
 
+vim.api.nvim_create_user_command("LiveGrep", function(opts)
+	vim.notify(vim.inspect(opts))
+	require("telescope.builtin").live_grep({ glob_pattern = opts.args })
+end, { nargs = 1 })
+
 local telescope = require("telescope")
 
 telescope.setup({
