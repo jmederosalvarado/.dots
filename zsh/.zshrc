@@ -48,6 +48,7 @@ alias history='history -f' # timestamps follow mm/dd/yyyy
 # COMPLETIONS {{{
 
 # Setup fpath
+fpath=("$HOME/.zsh/custom_completions" $fpath)
 fpath=("$HOME/.zsh/zsh-completions/src" $fpath)
 if has_brew; then
     fpath=("$(brew --prefix)/share/zsh-completions/src" $fpath)
@@ -194,7 +195,6 @@ alias ll='ls -lh'
 # TOOLS {{{
 
 export EDITOR="nvim" VISUAL="nvim"
-export ANSIBLE_VAULT_PASSWORD_FILE="./.vault_pass"
 
 export NVM_DIR="$HOME/.nvm"
 
@@ -209,7 +209,11 @@ fi
 
 # Setup rust
 source "$HOME/.cargo/env"
-export PATH="$HOME/.cargo/bin:$PATH"
+
+# Setup dotnet
+export DOTNET_ROOT="$HOME/.bin/dotnet"
+export PATH="$PATH:$DOTNET_ROOT"
+export PATH="$PATH:$HOME/.bin/netcoredbg"
 
 # Setup go
 export PATH="$HOME/.bin/go/bin:$PATH"
@@ -224,9 +228,7 @@ export PATH="$PATH:$HOME/.foundry/bin"
 
 # }}}
 
-# export DYLD_LIBRARY_PATH="/opt/homebrew/lib"
-
-eval "$('conda' 'shell.zsh' 'hook' 2> /dev/null)"
+export DYLD_FALLBACK_LIBRARY_PATH="/opt/homebrew/lib"
 
 # PROMPT {{{
 

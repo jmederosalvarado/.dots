@@ -1,6 +1,5 @@
 # Makefile to install dependecies
 
-nvim_packer = $(HOME)/.local/share/nvim/site/pack/packer/start/packer.nvim
 zsh_completions = $(HOME)/.zsh/zsh-completions
 zsh_autosuggestions = $(HOME)/.zsh/zsh-autosuggestions
 zsh_vi_mode = $(HOME)/.zsh/zsh-vi-mode
@@ -8,14 +7,7 @@ zsh_syntax = $(HOME)/.zsh/fast-syntax-highlighting
 tmux_tpm = $(HOME)/.tmux/plugins/tpm
 
 default:
-	@echo 'make [ nvim | zsh | tmux ]'
-
-.PHONY: nvim
-nvim: $(nvim_packer)
-	stow nvim
-
-$(nvim_packer):
-	git clone --depth 1 https://github.com/wbthomason/packer.nvim $@
+	@echo 'make [ zsh | tmux ]'
 
 .PHONY: zsh
 zsh: $(zsh_completions) $(zsh_autosuggestions) $(zsh_vi_mode) $(zsh_syntax)
