@@ -1,13 +1,14 @@
-has_brew () {
-    if [ -f "/opt/homebrew/bin/brew" ]; then
-        return 0
-    else
-        return 1
-    fi
+has_brew() {
+    return 1
+	if [ -f "/opt/homebrew/bin/brew" ]; then
+		return 0
+	else
+		return 1
+	fi
 }
 
 if has_brew; then
-    eval "$(/opt/homebrew/bin/brew shellenv)"
+	eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
 # Remove duplicates from PATH
@@ -51,7 +52,7 @@ alias history='history -f' # timestamps follow mm/dd/yyyy
 fpath=("$HOME/.zsh/custom_completions" $fpath)
 fpath=("$HOME/.zsh/zsh-completions/src" $fpath)
 if has_brew; then
-    fpath=("$(brew --prefix)/share/zsh-completions/src" $fpath)
+	fpath=("$(brew --prefix)/share/zsh-completions/src" $fpath)
 fi
 
 # Load all stock functions (from $fpath files)
@@ -99,81 +100,81 @@ zstyle ':completion:*:cd:*' tag-order local-directories directory-stack path-dir
 # KEYBINDINGS {{{
 
 autoload -U up-line-or-beginning-search &&
-    zle -N up-line-or-beginning-search
+	zle -N up-line-or-beginning-search
 autoload -U down-line-or-beginning-search &&
-    zle -N down-line-or-beginning-search
+	zle -N down-line-or-beginning-search
 
 # keybindings are defined using zvm_bindkey to prevent
 # conflicts with zsh-vi-mode plugin keybindings
 function zvm_after_init {
-    # automatically expand ... to ../..
-    function rationalise_dot {
-        if [[ $LBUFFER = *.. ]]; then
-            LBUFFER+=/..
-        else
-            LBUFFER+=.
-        fi
-    }
-    zvm_define_widget rationalise_dot
-    zvm_bindkey viins "." rationalise_dot
+	# automatically expand ... to ../..
+	function rationalise_dot {
+		if [[ $LBUFFER = *.. ]]; then
+			LBUFFER+=/..
+		else
+			LBUFFER+=.
+		fi
+	}
+	zvm_define_widget rationalise_dot
+	zvm_bindkey viins "." rationalise_dot
 
-    # # [Home] - Go to beginning of line
-    # zvm_bindkey viins "$terminfo[khome]" beginning-of-line
-    # # [End] - Go to end of line
-    # zvm_bindkey viins "$terminfo[kend]" end-of-line
+	# # [Home] - Go to beginning of line
+	# zvm_bindkey viins "$terminfo[khome]" beginning-of-line
+	# # [End] - Go to end of line
+	# zvm_bindkey viins "$terminfo[kend]" end-of-line
 
-    # # [Shift-Tab] - move through the completion menu backwards
-    # zvm_bindkey viins "$terminfo[kcbt]" reverse-menu-complete
+	# # [Shift-Tab] - move through the completion menu backwards
+	# zvm_bindkey viins "$terminfo[kcbt]" reverse-menu-complete
 
-    # # [Delete] - delete forward
-    # zvm_bindkey viins "^[[3~" delete-char
+	# # [Delete] - delete forward
+	# zvm_bindkey viins "^[[3~" delete-char
 
-    # # [Ctrl-Delete] - delete whole forward-word
-    # zvm_bindkey viins '^[[3;5~' kill-word
+	# # [Ctrl-Delete] - delete whole forward-word
+	# zvm_bindkey viins '^[[3;5~' kill-word
 
-    # # [Ctrl-RightArrow] - move forward one word
-    # zvm_bindkey viins '^[[1;5C' forward-word
-    # # [Ctrl-LeftArrow] - move backward one word
-    # zvm_bindkey viins '^[[1;5D' backward-word
+	# # [Ctrl-RightArrow] - move forward one word
+	# zvm_bindkey viins '^[[1;5C' forward-word
+	# # [Ctrl-LeftArrow] - move backward one word
+	# zvm_bindkey viins '^[[1;5D' backward-word
 
-    # # [UpArrow] - Search history backwards
-    # zvm_bindkey viins "$terminfo[kcuu1]" up-line-or-beginning-search
-    # # [DownArrow] - Search history forward
-    # zvm_bindkey viins "$terminfo[kcud1]" down-line-or-beginning-search
+	# # [UpArrow] - Search history backwards
+	# zvm_bindkey viins "$terminfo[kcuu1]" up-line-or-beginning-search
+	# # [DownArrow] - Search history forward
+	# zvm_bindkey viins "$terminfo[kcud1]" down-line-or-beginning-search
 
-    zvm_bindkey viins '^P' up-line-or-beginning-search
-    zvm_bindkey viins '^N' down-line-or-beginning-search
+	zvm_bindkey viins '^P' up-line-or-beginning-search
+	zvm_bindkey viins '^N' down-line-or-beginning-search
 }
 
 function zvm_after_lazy_keybindings {
-    # # [Home] - Go to beginning of line
-    # zvm_bindkey vicmd "$terminfo[khome]" beginning-of-line
-    # # [End] - Go to end of line
-    # zvm_bindkey vicmd "$terminfo[kend]" end-of-line
+	# # [Home] - Go to beginning of line
+	# zvm_bindkey vicmd "$terminfo[khome]" beginning-of-line
+	# # [End] - Go to end of line
+	# zvm_bindkey vicmd "$terminfo[kend]" end-of-line
 
-    # # [Shift-Tab] - move through the completion menu backwards
-    # zvm_bindkey vicmd "$terminfo[kcbt]" reverse-menu-complete
+	# # [Shift-Tab] - move through the completion menu backwards
+	# zvm_bindkey vicmd "$terminfo[kcbt]" reverse-menu-complete
 
-    # # [Delete] - delete forward
-    # zvm_bindkey vicmd "^[[3~" delete-char
+	# # [Delete] - delete forward
+	# zvm_bindkey vicmd "^[[3~" delete-char
 
-    # # [Ctrl-Delete] - delete whole forward-word
-    # zvm_bindkey vicmd '^[[3;5~' kill-word
+	# # [Ctrl-Delete] - delete whole forward-word
+	# zvm_bindkey vicmd '^[[3;5~' kill-word
 
-    # # [Ctrl-RightArrow] - move forward one word
-    # zvm_bindkey vicmd '^[[1;5C' forward-word
-    # # [Ctrl-LeftArrow] - move backward one word
-    # zvm_bindkey vicmd '^[[1;5D' backward-word
+	# # [Ctrl-RightArrow] - move forward one word
+	# zvm_bindkey vicmd '^[[1;5C' forward-word
+	# # [Ctrl-LeftArrow] - move backward one word
+	# zvm_bindkey vicmd '^[[1;5D' backward-word
 
-    # # [UpArrow] - Search history backwards
-    # zvm_bindkey vicmd "$terminfo[kcuu1]" up-line-or-beginning-search
-    # # [DownArrow] - Search history forward
-    # zvm_bindkey vicmd "$terminfo[kcud1]" down-line-or-beginning-search
+	# # [UpArrow] - Search history backwards
+	# zvm_bindkey vicmd "$terminfo[kcuu1]" up-line-or-beginning-search
+	# # [DownArrow] - Search history forward
+	# zvm_bindkey vicmd "$terminfo[kcud1]" down-line-or-beginning-search
 
-    zvm_bindkey viins '^P' up-line-or-beginning-search
-    zvm_bindkey viins '^N' down-line-or-beginning-search
-    zvm_bindkey vicmd 'k' up-line-or-beginning-search
-    zvm_bindkey vicmd 'j' down-line-or-beginning-search
+	zvm_bindkey viins '^P' up-line-or-beginning-search
+	zvm_bindkey viins '^N' down-line-or-beginning-search
+	zvm_bindkey vicmd 'k' up-line-or-beginning-search
+	zvm_bindkey vicmd 'j' down-line-or-beginning-search
 }
 
 source "$HOME/.zsh/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
@@ -182,8 +183,8 @@ source "$HOME/.zsh/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
 
 # ALIASES & HELPERS {{{
 
-take () {
-    mkdir -p $1 && cd $1
+take() {
+	mkdir -p $1 && cd $1
 }
 
 alias ls='ls --color'
@@ -199,16 +200,19 @@ export EDITOR="nvim" VISUAL="nvim"
 export NVM_DIR="$HOME/.nvm"
 
 if has_brew; then
-    # use gnu coreutils by default
-    export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
+	# use gnu coreutils by default
+	export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
 
-    [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-    [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+	[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"                                       # This loads nvm
+	[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
 
 fi
 
 # Setup rust
 source "$HOME/.cargo/env"
+
+# Setup zig
+export PATH="$HOME/.bin/zig:$PATH"
 
 # Setup dotnet
 export DOTNET_ROOT="$HOME/.bin/dotnet"
@@ -226,6 +230,9 @@ eval "$(pyenv virtualenv-init -)"
 # Setup foundry
 export PATH="$PATH:$HOME/.foundry/bin"
 
+# Setup copilot-cli
+eval "$(github-copilot-cli alias -- "$0")"
+
 # }}}
 
 export DYLD_FALLBACK_LIBRARY_PATH="/opt/homebrew/lib"
@@ -238,3 +245,10 @@ source "$HOME/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
 eval "$(starship init zsh)"
 
 # }}}
+
+
+# temp
+
+function opdiff() {
+  code --diff ~/src/geth/$1 ~/src/op-geth/$1
+}
