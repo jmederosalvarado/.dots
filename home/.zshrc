@@ -43,47 +43,45 @@ alias history='history -f' # timestamps follow mm/dd/yyyy
 # Setup fpath
 fpath=("$zsh_completions/src" $fpath)
 
-source "$zsh_autocomplete/zsh-autocomplete.plugin.zsh"
+# Load all stock functions (from $fpath files)
+autoload -U compinit && compinit -d "$HOME/.zcompdump"
 
-# # Load all stock functions (from $fpath files)
-# autoload -U compinit && compinit -d "$HOME/.zcompdump"
-#
-# # Automatically load bash completion functions
-# autoload -U +X bashcompinit && bashcompinit
-#
-# # FIXME - the load process here seems a bit bizarre
-# zmodload -i zsh/complist
-#
-# unsetopt menu_complete # do not autoselect the first completion entry
-# setopt auto_menu       # show completion menua on successive tab press
-# setopt complete_in_word
-# setopt always_to_end
-#
-# # zstyle pattern
-# # :completion:<function>:<completer>:<command>:<argument>:<tag>
-#
-# # define completers
-# zstyle ":completion:*" completer _complete _match _approximate
-#
-# zstyle ':completion:*:*:*:*:*' menu select
-#
-# # case insensitive (all), partial-word and substring completion
-# # hyphen insensitive
-# zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
-# # hyphen sensitive
-# # zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
-#
-# # Complete . and .. special directories
-# zstyle ':completion:*' special-dirs true
-#
-# # disable named-directories autocompletion
-# zstyle ':completion:*:cd:*' tag-order local-directories directory-stack path-directories
-#
-# # use caching so that commands like apt and dpkg complete are usable
-# # zstyle ':completion:*' use-cache on
-# # zstyle ':completion:*' cache-path "$HOME/.zcompdump"
-#
-# # eval $(dircolors -b) && zstyle ":completion:*" list-colors "${(s.:.)LS_COLORS}"
+# Automatically load bash completion functions
+autoload -U +X bashcompinit && bashcompinit
+
+# FIXME - the load process here seems a bit bizarre
+zmodload -i zsh/complist
+
+unsetopt menu_complete # do not autoselect the first completion entry
+setopt auto_menu       # show completion menua on successive tab press
+setopt complete_in_word
+setopt always_to_end
+
+# zstyle pattern
+# :completion:<function>:<completer>:<command>:<argument>:<tag>
+
+# define completers
+zstyle ":completion:*" completer _complete _match _approximate
+
+zstyle ':completion:*:*:*:*:*' menu select
+
+# case insensitive (all), partial-word and substring completion
+# hyphen insensitive
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
+# hyphen sensitive
+# zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
+
+# Complete . and .. special directories
+zstyle ':completion:*' special-dirs true
+
+# disable named-directories autocompletion
+zstyle ':completion:*:cd:*' tag-order local-directories directory-stack path-directories
+
+# use caching so that commands like apt and dpkg complete are usable
+# zstyle ':completion:*' use-cache on
+# zstyle ':completion:*' cache-path "$HOME/.zcompdump"
+
+# eval $(dircolors -b) && zstyle ":completion:*" list-colors "${(s.:.)LS_COLORS}"
 
 # }}}
 
