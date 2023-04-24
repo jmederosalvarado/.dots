@@ -19,7 +19,7 @@
       },
       "to": {
         "owner": "jmederosalvarado",
-        "repo": "dots.nix",
+        "repo": ".dots",
         "type": "github"
       }
     }
