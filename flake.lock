@@ -36,6 +36,7 @@
       "inputs": {
         "flake-utils": "flake-utils",
         "nixpkgs": "nixpkgs",
+        "zsh-autocomplete": "zsh-autocomplete",
         "zsh-autosuggestions": "zsh-autosuggestions",
         "zsh-completions": "zsh-completions",
         "zsh-fast-syntax-highlighting": "zsh-fast-syntax-highlighting",
@@ -54,6 +55,22 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "zsh-autocomplete": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1680772705,
+        "narHash": "sha256-p/lhstJrqZz2k0Rfp/VmXdDO/XQWk6Rx4mLesO/iy38=",
+        "owner": "marlonrichert",
+        "repo": "zsh-autocomplete",
+        "rev": "784e3a9f8b4dd01c49ed93356b5a1f5cc199ce54",
+        "type": "github"
+      },
+      "original": {
+        "owner": "marlonrichert",
+        "repo": "zsh-autocomplete",
         "type": "github"
       }
     },
