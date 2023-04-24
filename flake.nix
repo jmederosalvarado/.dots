@@ -6,6 +6,11 @@
 
     # zsh {{{
 
+    zsh-autocomplete = {
+      url = "github:marlonrichert/zsh-autocomplete";
+      flake = false;
+    };
+
     zsh-autosuggestions = {
       url = "github:zsh-users/zsh-autosuggestions";
       flake = false;
@@ -44,6 +49,7 @@
             }
 
             # Plugins
+            zsh_autocomplete="${inputs.zsh-autocomplete}"
             zsh_autosuggestions="${inputs.zsh-autosuggestions}"
             zsh_completions="${inputs.zsh-completions}"
             zsh_fast_syntax_highlighting="${inputs.zsh-fast-syntax-highlighting}"
