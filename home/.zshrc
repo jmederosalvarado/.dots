@@ -191,8 +191,8 @@ export DYLD_FALLBACK_LIBRARY_PATH="$NIX_PROFILE/lib"
 
 # PROMPT {{{
 
-# source "$HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
-# source "$HOME/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
+source "$zsh_autosuggestions/zsh-autosuggestions.plugin.zsh"
+source "$zsh_fast_syntax_highlighting/fast-syntax-highlighting.plugin.zsh"
 
 eval "$(starship init zsh)"
 
