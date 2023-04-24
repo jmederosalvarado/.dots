@@ -1,15 +1,7 @@
-has_brew() {
-    return 1
-	if [ -f "/opt/homebrew/bin/brew" ]; then
-		return 0
-	else
-		return 1
-	fi
-}
+NIX_PROFILE="$HOME/.nix-profile"
 
-if has_brew; then
-	eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
+# Load zsh environment for nix
+source "$NIX_PROFILE/share/nix.zsh"
 
 # Remove duplicates from PATH
 typeset -U path
@@ -49,11 +41,7 @@ alias history='history -f' # timestamps follow mm/dd/yyyy
 # COMPLETIONS {{{
 
 # Setup fpath
-fpath=("$HOME/.zsh/custom_completions" $fpath)
-fpath=("$HOME/.zsh/zsh-completions/src" $fpath)
-if has_brew; then
-	fpath=("$(brew --prefix)/share/zsh-completions/src" $fpath)
-fi
+fpath=("$zsh_completions/src" $fpath)
 
 # Load all stock functions (from $fpath files)
 autoload -U compinit && compinit -d "$HOME/.zcompdump"
@@ -65,7 +53,7 @@ autoload -U +X bashcompinit && bashcompinit
 zmodload -i zsh/complist
 
 unsetopt menu_complete # do not autoselect the first completion entry
-setopt auto_menu       # show completion menu on successive tab press
+setopt auto_menu       # show completion menua on successive tab press
 setopt complete_in_word
 setopt always_to_end
 
@@ -197,58 +185,21 @@ alias ll='ls -lh'
 
 export EDITOR="nvim" VISUAL="nvim"
 
-export NVM_DIR="$HOME/.nvm"
-
-if has_brew; then
-	# use gnu coreutils by default
-	export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
-
-	[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"                                       # This loads nvm
-	[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
-
-fi
-
-# Setup rust
-source "$HOME/.cargo/env"
-
-# Setup zig
-export PATH="$HOME/.bin/zig:$PATH"
-
-# Setup dotnet
-export DOTNET_ROOT="$HOME/.bin/dotnet"
-export PATH="$PATH:$DOTNET_ROOT"
-export PATH="$PATH:$HOME/.bin/netcoredbg"
-
-# Setup go
-export PATH="$HOME/.bin/go/bin:$PATH"
-export PATH="$HOME/.go/bin:$PATH"
-
-# Setup pyenv and pyenv-virtualenv
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-
-# Setup foundry
-export PATH="$PATH:$HOME/.foundry/bin"
-
-# Setup copilot-cli
-eval "$(github-copilot-cli alias -- "$0")"
-
 # }}}
 
-export DYLD_FALLBACK_LIBRARY_PATH="/opt/homebrew/lib"
+export DYLD_FALLBACK_LIBRARY_PATH="$NIX_PROFILE/lib"
 
 # PROMPT {{{
 
-source "$HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
-source "$HOME/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
+# source "$HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
+# source "$HOME/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
 
 eval "$(starship init zsh)"
 
 # }}}
 
-
 # temp
 
 function opdiff() {
-  code --diff ~/src/geth/$1 ~/src/op-geth/$1
+	code --diff ~/src/geth/$1 ~/src/op-geth/$1
 }

@@ -11,6 +11,17 @@
         "repo": "neovim",
         "type": "github"
       }
+    },
+    {
+      "from": {
+        "id": "dots",
+        "type": "indirect"
+      },
+      "to": {
+        "owner": "jmederosalvarado",
+        "repo": "dots.nix",
+        "type": "github"
+      }
     }
   ],
   "version": 2
