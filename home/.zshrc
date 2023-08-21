@@ -1,7 +1,17 @@
+# Nix
+if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+  source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+fi
+# End Nix
+
 NIX_PROFILE="$HOME/.nix-profile"
 
 # Load zsh environment for nix
 source "$NIX_PROFILE/share/nix.zsh"
+
+nix-upgrade() {
+	nix profile list | cut -d ' ' -f1 -f2 | fzf --height=~20 | cut -d ' ' -f1 | xargs nix profile upgrade
+}
 
 # Remove duplicates from PATH
 typeset -U path
@@ -95,17 +105,6 @@ autoload -U down-line-or-beginning-search &&
 # keybindings are defined using zvm_bindkey to prevent
 # conflicts with zsh-vi-mode plugin keybindings
 function zvm_after_init {
-	# automatically expand ... to ../..
-	function rationalise_dot {
-		if [[ $LBUFFER = *.. ]]; then
-			LBUFFER+=/..
-		else
-			LBUFFER+=.
-		fi
-	}
-	zvm_define_widget rationalise_dot
-	zvm_bindkey viins "." rationalise_dot
-
 	# # [Home] - Go to beginning of line
 	# zvm_bindkey viins "$terminfo[khome]" beginning-of-line
 	# # [End] - Go to end of line
@@ -185,6 +184,11 @@ alias ll='ls -lh'
 
 export EDITOR="nvim" VISUAL="nvim"
 
+# check if github-copilot-cli is installed
+if command -v github-copilot-cli &>/dev/null; then
+	eval "$(github-copilot-cli alias zsh)"
+fi
+
 # }}}
 
 export DYLD_FALLBACK_LIBRARY_PATH="$NIX_PROFILE/lib"
@@ -197,9 +201,3 @@ source "$zsh_fast_syntax_highlighting/fast-syntax-highlighting.plugin.zsh"
 eval "$(starship init zsh)"
 
 # }}}
-
-# temp
-
-function opdiff() {
-	code --diff ~/src/geth/$1 ~/src/op-geth/$1
-}
