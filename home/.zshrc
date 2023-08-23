@@ -110,8 +110,8 @@ function zvm_after_init {
 	# # [End] - Go to end of line
 	# zvm_bindkey viins "$terminfo[kend]" end-of-line
 
-	# # [Shift-Tab] - move through the completion menu backwards
-	# zvm_bindkey viins "$terminfo[kcbt]" reverse-menu-complete
+	# [Shift-Tab] - move through the completion menu backwards
+	zvm_bindkey viins "$terminfo[kcbt]" reverse-menu-complete
 
 	# # [Delete] - delete forward
 	# zvm_bindkey viins "^[[3~" delete-char
@@ -139,8 +139,8 @@ function zvm_after_lazy_keybindings {
 	# # [End] - Go to end of line
 	# zvm_bindkey vicmd "$terminfo[kend]" end-of-line
 
-	# # [Shift-Tab] - move through the completion menu backwards
-	# zvm_bindkey vicmd "$terminfo[kcbt]" reverse-menu-complete
+	# [Shift-Tab] - move through the completion menu backwards
+	zvm_bindkey vicmd "$terminfo[kcbt]" reverse-menu-complete
 
 	# # [Delete] - delete forward
 	# zvm_bindkey vicmd "^[[3~" delete-char
