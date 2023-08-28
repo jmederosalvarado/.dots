@@ -156,7 +156,7 @@ function zvm_after_lazy_keybindings {
 	zvm_bindkey vicmd 'j' down-line-or-beginning-search
 }
 
-source "$HOMEBREW_PREFIX/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
+source "$HOMEBREW_PREFIX/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
 
 # }}}
 
@@ -183,7 +183,7 @@ export DYLD_FALLBACK_LIBRARY_PATH="$HOMEBREW_PREFIX/lib"
 # PROMPT {{{
 
 source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
-source "$HOMEBREW_PREFIX/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
+source "$HOMEBREW_PREFIX/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
 
 eval "$(starship init zsh)"
 
