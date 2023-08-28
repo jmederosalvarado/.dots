@@ -188,3 +188,13 @@ source "$HOMEBREW_PREFIX/share/zsh-fast-syntax-highlighting/fast-syntax-highligh
 eval "$(starship init zsh)"
 
 # }}}
+
+# Terminal Shell Integration {{{
+
+if [ "$TERMINAL_APP" = "WEZTERM" ]; then
+    source "/Applications/WezTerm.app/Contents/Resources/wezterm.sh"
+else
+    # do nothing
+fi
+
+# }}}

@@ -5,6 +5,14 @@ if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
+-- shell integration {{{
+
+config.set_environment_variables = {
+    TERMINAL_APP = "WEZTERM"
+}
+
+-- }}}
+
 -- colors {{{
 
 config.color_scheme = "Catppuccin Frappe"
