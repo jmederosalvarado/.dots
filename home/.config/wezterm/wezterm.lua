@@ -48,6 +48,12 @@ config.window_padding = {
 
 -- }}}
 
+-- multiplexing {{{
+
+
+
+-- }}}
+
 -- hyperlinks {{{
 
 config.hyperlink_rules = wezterm.default_hyperlink_rules()

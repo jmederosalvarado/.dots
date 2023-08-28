@@ -174,7 +174,6 @@ alias ll='ls -lh'
 
 # TOOLS {{{
 
-export EDITOR="nvim" VISUAL="nvim"
 
 # }}}
 
