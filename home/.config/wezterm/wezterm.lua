@@ -15,12 +15,12 @@ config.color_scheme = "Catppuccin Frappe"
 
 config.font_size = 14.0
 config.allow_square_glyphs_to_overflow_width = "Never"
-config.font = wezterm.font_with_fallback({
-	"Iosevka Term",
-	-- "nonicons",
-	-- "Symbols Nerd Font Mono",
-	"Iosevka Nerd Font Mono",
-})
+-- config.font = wezterm.font_with_fallback({
+-- 	"Iosevka Term",
+-- 	-- "nonicons",
+-- 	-- "Symbols Nerd Font Mono",
+-- 	"Iosevka Nerd Font Mono",
+-- })
 
 -- }}}
 

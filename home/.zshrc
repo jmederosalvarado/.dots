@@ -1,17 +1,10 @@
-# Nix
-if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
-  source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+if type brew &>/dev/null; then
+	HOMEBREW_PREFIX="$(brew --prefix)"
+else
+	echo 1>&2 "Homebrew not installed!"
+	echo 1>&2 "    https://brew.sh"
+	exit 1
 fi
-# End Nix
-
-NIX_PROFILE="$HOME/.nix-profile"
-
-# Load zsh environment for nix
-source "$NIX_PROFILE/share/nix.zsh"
-
-nix-upgrade() {
-	nix profile list | cut -d ' ' -f1 -f2 | fzf --height=~20 | cut -d ' ' -f1 | xargs nix profile upgrade
-}
 
 # Remove duplicates from PATH
 typeset -U path
@@ -31,7 +24,6 @@ setopt multios             # Allow multiple redirection streams
 
 # HISTORY {{{
 
-HISTFILE="$HOME/.zhistory"
 HISTSIZE=50000
 SAVEHIST=10000
 
@@ -51,10 +43,10 @@ alias history='history -f' # timestamps follow mm/dd/yyyy
 # COMPLETIONS {{{
 
 # Setup fpath
-fpath=("$zsh_completions/src" $fpath)
+fpath=("$HOMEBREW_PREFIX/share/zsh/site-functions" "$HOMEBREW_PREFIX/share/zsh-completions" $fpath)
 
 # Load all stock functions (from $fpath files)
-autoload -U compinit && compinit -d "$HOME/.zcompdump"
+autoload -Uz compinit && compinit -u
 
 # Automatically load bash completion functions
 autoload -U +X bashcompinit && bashcompinit
@@ -164,7 +156,7 @@ function zvm_after_lazy_keybindings {
 	zvm_bindkey vicmd 'j' down-line-or-beginning-search
 }
 
-source "$HOME/.zsh/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
+source "$HOMEBREW_PREFIX/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh"
 
 # }}}
 
@@ -184,19 +176,14 @@ alias ll='ls -lh'
 
 export EDITOR="nvim" VISUAL="nvim"
 
-# check if github-copilot-cli is installed
-if command -v github-copilot-cli &>/dev/null; then
-	eval "$(github-copilot-cli alias zsh)"
-fi
-
 # }}}
 
-export DYLD_FALLBACK_LIBRARY_PATH="$NIX_PROFILE/lib"
+export DYLD_FALLBACK_LIBRARY_PATH="$HOMEBREW_PREFIX/lib"
 
 # PROMPT {{{
 
-source "$zsh_autosuggestions/zsh-autosuggestions.plugin.zsh"
-source "$zsh_fast_syntax_highlighting/fast-syntax-highlighting.plugin.zsh"
+source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+source "$HOMEBREW_PREFIX/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
 
 eval "$(starship init zsh)"
 
