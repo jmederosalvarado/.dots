@@ -1,1 +1,1 @@
-stow -t $HOME -S home
+mkdir -p "$HOME/.config" && stow -t "$HOME" -S "home"
