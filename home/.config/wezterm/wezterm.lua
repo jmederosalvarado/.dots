@@ -27,7 +27,9 @@ config.font = wezterm.font_with_fallback({
 -- tabs & windows {{{
 
 config.enable_tab_bar = true
+config.use_fancy_tab_bar = false
 config.hide_tab_bar_if_only_one_tab = true
+config.tab_bar_at_bottom = true
 
 config.window_padding = {
 	left = 0,
