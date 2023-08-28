@@ -1,1 +1,1 @@
-stow -t /Users/jmederos -S home
+stow -t $HOME -S home
