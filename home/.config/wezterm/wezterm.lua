@@ -76,15 +76,15 @@ config.keys = {
     { key= "s", mods = "LEADER", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
 
     -- tab navigation
-    { key = "1", mods = "CMD", action = act.ActivateTab(1) },
-    { key = "2", mods = "CMD", action = act.ActivateTab(2) },
-    { key = "3", mods = "CMD", action = act.ActivateTab(3) },
-    { key = "4", mods = "CMD", action = act.ActivateTab(4) },
-    { key = "5", mods = "CMD", action = act.ActivateTab(5) },
-    { key = "6", mods = "CMD", action = act.ActivateTab(6) },
-    { key = "7", mods = "CMD", action = act.ActivateTab(7) },
-    { key = "8", mods = "CMD", action = act.ActivateTab(8) },
-    { key = "9", mods = "CMD", action = act.ActivateTab(9) },
+    { key = "1", mods = "CMD", action = act.ActivateTab(0) },
+    { key = "2", mods = "CMD", action = act.ActivateTab(1) },
+    { key = "3", mods = "CMD", action = act.ActivateTab(2) },
+    { key = "4", mods = "CMD", action = act.ActivateTab(3) },
+    { key = "5", mods = "CMD", action = act.ActivateTab(4) },
+    { key = "6", mods = "CMD", action = act.ActivateTab(5) },
+    { key = "7", mods = "CMD", action = act.ActivateTab(6) },
+    { key = "8", mods = "CMD", action = act.ActivateTab(7) },
+    { key = "9", mods = "CMD", action = act.ActivateTab(8) },
 
     -- pane navigation
     { key = "h", mods = "CMD", action = act.ActivatePaneDirection("Left")},

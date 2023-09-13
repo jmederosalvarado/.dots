@@ -191,7 +191,7 @@ eval "$(starship init zsh)"
 # Terminal Shell Integration {{{
 
 if [ "$TERMINAL_APP" = "WEZTERM" ]; then
-    source "/Applications/WezTerm.app/Contents/Resources/wezterm.sh"
+    # source "/Applications/WezTerm.app/Contents/Resources/wezterm.sh"
 else
     # do nothing
 fi
