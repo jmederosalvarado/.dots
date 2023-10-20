@@ -8,7 +8,7 @@ end
 -- shell integration {{{
 
 config.set_environment_variables = {
-    TERMINAL_APP = "WEZTERM"
+	TERMINAL_APP = "WEZTERM",
 }
 
 -- }}}
@@ -22,13 +22,14 @@ config.color_scheme = "Catppuccin Frappe"
 -- font {{{
 
 config.font_size = 14.0
-config.allow_square_glyphs_to_overflow_width = "Never"
-config.font = wezterm.font_with_fallback({
+config.allow_square_glyphs_to_overflow_width = "Always"
+
+local iosevka = {
 	"Iosevka Term",
-	"IosevkaTerm Nerd Font",
-	-- "IosevkaTerm Nerd Font Mono",
-})
--- config.font = wezterm.font("IosevkaTerm Nerd Font")
+	{ family = "Symbols Nerd Font Mono", scale = 0.70 },
+}
+
+config.font = wezterm.font_with_fallback(iosevka)
 
 -- }}}
 
@@ -50,8 +51,6 @@ config.window_padding = {
 
 -- multiplexing {{{
 
-
-
 -- }}}
 
 -- keybindings {{{
@@ -59,38 +58,38 @@ config.window_padding = {
 local act = wezterm.action
 
 config.disable_default_key_bindings = true
-config.leader = { key = "a", mods = "CTRL" }
+config.leader = { key = "a", mods = "CMD" }
 config.keys = {
-    { key = "a", mods = "LEADER|CTRL", action = act.SendKey({key = "a", mods = "CTRL"})},
+	{ key = "a", mods = "LEADER|CTRL", action = act.SendKey({ key = "a", mods = "CTRL" }) },
 
-    -- misc
-    { key = "c", mods = "CMD", action = act.CopyTo("Clipboard") },
-    { key = "v", mods = "CMD", action = act.PasteFrom("Clipboard") },
+	-- misc
+	{ key = "c", mods = "CMD", action = act.CopyTo("Clipboard") },
+	{ key = "v", mods = "CMD", action = act.PasteFrom("Clipboard") },
 
-    -- tab creation
-    { key= "c", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
-    { key= "n", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
+	-- tab creation
+	{ key = "c", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
+	{ key = "n", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
 
-    -- pane creation
-    { key= "v", mods = "LEADER", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
-    { key= "s", mods = "LEADER", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+	-- pane creation
+	{ key = "v", mods = "LEADER", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+	{ key = "s", mods = "LEADER", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
 
-    -- tab navigation
-    { key = "1", mods = "CMD", action = act.ActivateTab(0) },
-    { key = "2", mods = "CMD", action = act.ActivateTab(1) },
-    { key = "3", mods = "CMD", action = act.ActivateTab(2) },
-    { key = "4", mods = "CMD", action = act.ActivateTab(3) },
-    { key = "5", mods = "CMD", action = act.ActivateTab(4) },
-    { key = "6", mods = "CMD", action = act.ActivateTab(5) },
-    { key = "7", mods = "CMD", action = act.ActivateTab(6) },
-    { key = "8", mods = "CMD", action = act.ActivateTab(7) },
-    { key = "9", mods = "CMD", action = act.ActivateTab(8) },
+	-- tab navigation
+	{ key = "1", mods = "CMD", action = act.ActivateTab(0) },
+	{ key = "2", mods = "CMD", action = act.ActivateTab(1) },
+	{ key = "3", mods = "CMD", action = act.ActivateTab(2) },
+	{ key = "4", mods = "CMD", action = act.ActivateTab(3) },
+	{ key = "5", mods = "CMD", action = act.ActivateTab(4) },
+	{ key = "6", mods = "CMD", action = act.ActivateTab(5) },
+	{ key = "7", mods = "CMD", action = act.ActivateTab(6) },
+	{ key = "8", mods = "CMD", action = act.ActivateTab(7) },
+	{ key = "9", mods = "CMD", action = act.ActivateTab(8) },
 
-    -- pane navigation
-    { key = "h", mods = "CMD", action = act.ActivatePaneDirection("Left")},
-    { key = "j", mods = "CMD", action = act.ActivatePaneDirection("Down")},
-    { key = "k", mods = "CMD", action = act.ActivatePaneDirection("Up")},
-    { key = "l", mods = "CMD", action = act.ActivatePaneDirection("Right")},
+	-- pane navigation
+	{ key = "h", mods = "CMD", action = act.ActivatePaneDirection("Left") },
+	{ key = "j", mods = "CMD", action = act.ActivatePaneDirection("Down") },
+	{ key = "k", mods = "CMD", action = act.ActivatePaneDirection("Up") },
+	{ key = "l", mods = "CMD", action = act.ActivatePaneDirection("Right") },
 }
 
 -- }}}

@@ -15,16 +15,14 @@ name=${2:-${basename%.*}}
 mkdir "$name"
 cd "$name"
 
-# Moves all the administrative git files (a.k.a $GIT_DIR) under .bare directory.
-#
-# Plan is to create worktrees as siblings of this directory.
-# Example targeted structure:
-# .bare
-# main
-# new-awesome-feature
-# hotfix-bug-12
-# ...
-git clone --bare "$url" .bare
+# check if url starts with git@ or https:// using posix
+if [[ $url == git@* ]] || [[ $url == https://* ]]; then
+    git clone --bare "$url" .bare
+else
+    git clone --bare "git@github.com:$url" .bare
+fi
+
+# Creates a .git file with the path to the bare repo
 echo "gitdir: ./.bare" > .git
 
 # Explicitly sets the remote origin fetch so we can fetch remote branches

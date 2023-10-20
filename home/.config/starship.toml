@@ -21,7 +21,7 @@ $character\
 """
 
 [directory]
-read_only = " "
+read_only = " 󰉐"
 style = "bold blue"
 
 [git_commit]
