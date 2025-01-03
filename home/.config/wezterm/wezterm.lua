@@ -1,6 +1,7 @@
 local wezterm = require("wezterm")
 
 local config = {}
+
 if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
@@ -15,18 +16,54 @@ config.set_environment_variables = {
 
 -- colors {{{
 
-config.color_scheme = "Catppuccin Frappe"
+local catpuccin = require("catpuccin.plugin")
+
+catpuccin.apply_to_config(config, {
+	flavor = "frappe",
+	accent = "blue",
+	sync = true,
+	sync_flavors = { light = "latte", dark = "frappe" },
+	color_overrides = {
+		mocha = {},
+		macchiato = {},
+		frappe = {
+			base = "#26262a",
+			mantle = "#222226",
+			crust = "#1E1E22",
+
+			surface0 = "#363646",
+			surface1 = "#464656",
+			surface2 = "#5E5E6E",
+
+			overlay0 = "#6E6E7E",
+			overlay1 = "#808090",
+			overlay2 = "#9393a3",
+
+			subtext0 = "#A6A6b6",
+			subtext1 = "#B9B9c9",
+
+			text = "#D2D2e2",
+		},
+		latte = {},
+	},
+	token_overrides = { mocha = {}, macchiato = {}, frappe = {}, latte = {} },
+})
 
 -- }}}
 
 -- font {{{
 
-config.font_size = 14.0
+config.font_size = 15.0
 config.allow_square_glyphs_to_overflow_width = "Always"
 
 local iosevka = {
-	"Iosevka Term",
-	{ family = "Symbols Nerd Font Mono", scale = 0.70 },
+"Iosevka Term",
+-- "Iosevka Term Curly",
+-- "Iosevka Term Curly Slab",
+-- "Iosevka Term SS08",
+-- "Iosevka Term Slab",
+	{ family = "IosevkaTerm Nerd Font Propo", scale = 0.70 },
+	-- { family = "Symbols Nerd Font Mono", scale = 0.70 },
 }
 
 config.font = wezterm.font_with_fallback(iosevka)

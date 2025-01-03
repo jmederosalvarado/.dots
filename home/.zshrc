@@ -43,7 +43,7 @@ alias history='history -f' # timestamps follow mm/dd/yyyy
 # COMPLETIONS {{{
 
 # Setup fpath
-fpath=("$HOMEBREW_PREFIX/share/zsh/site-functions" "$HOMEBREW_PREFIX/share/zsh-completions" $fpath)
+fpath=("$HOME/.local/share/zsh/site-functions" "$HOMEBREW_PREFIX/share/zsh/site-functions" "$HOMEBREW_PREFIX/share/zsh-completions" $fpath)
 
 # Load all stock functions (from $fpath files)
 autoload -Uz compinit && compinit -u
@@ -166,6 +166,10 @@ take() {
 	mkdir -p $1 && cd $1
 }
 
+load_key_anthropic () {
+    export ANTHROPIC_API_KEY=$(op read "op://Personal/Anthropic API Key/credential")
+}
+
 alias ls='ls --color'
 alias l='ls -lah'
 alias ll='ls -lh'
@@ -197,3 +201,13 @@ else
 fi
 
 # }}}
+
+# opam configuration
+[[ ! -r /Users/jmederos/.opam/opam-init/init.zsh ]] || source /Users/jmederos/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
+
+# bun completions
+[ -s "/Users/jmederos/.bun/_bun" ] && source "/Users/jmederos/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

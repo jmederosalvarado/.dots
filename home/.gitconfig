@@ -16,3 +16,10 @@
     type = cat-file -t
     dump = cat-file -p
     bare = "!sh $HOME/.dots/scripts/git-bare.sh"
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+[submodule]
+	recurse = true
