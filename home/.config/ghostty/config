@@ -1,0 +1,7 @@
+keybind = global:cmd+grave_accent=toggle_quick_terminal
+
+command = /opt/homebrew/bin/fish
+
+#font-family = Iosevka Term
+#font-size = 14
+#adjust-underline-position = 10%

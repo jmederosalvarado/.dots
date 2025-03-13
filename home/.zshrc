@@ -43,49 +43,16 @@ alias history='history -f' # timestamps follow mm/dd/yyyy
 # COMPLETIONS {{{
 
 # Setup fpath
-fpath=("$HOMEBREW_PREFIX/share/zsh/site-functions" "$HOMEBREW_PREFIX/share/zsh-completions" $fpath)
+fpath=("$HOME/.local/share/zsh/site-functions" "$HOMEBREW_PREFIX/share/zsh/site-functions" "$HOMEBREW_PREFIX/share/zsh-completions" $fpath)
 
-# Load all stock functions (from $fpath files)
-autoload -Uz compinit && compinit -u
 
-# Automatically load bash completion functions
-autoload -U +X bashcompinit && bashcompinit
+source "$HOMEBREW_PREFIX/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
 
-# FIXME - the load process here seems a bit bizarre
-zmodload -i zsh/complist
+bindkey              '^I' menu-select
+bindkey "$terminfo[kcbt]" menu-select
 
-unsetopt menu_complete # do not autoselect the first completion entry
-setopt auto_menu       # show completion menua on successive tab press
-setopt complete_in_word
-setopt always_to_end
-
-# zstyle pattern
-# :completion:<function>:<completer>:<command>:<argument>:<tag>
-
-# define completers
-zstyle ":completion:*" completer _complete _match _approximate
-
-zstyle ':completion:*:*:*:*:*' menu select
-
-# case insensitive (all), partial-word and substring completion
-# hyphen insensitive
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
-# hyphen sensitive
-# zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
-
-# Complete . and .. special directories
-zstyle ':completion:*' special-dirs true
-
-# disable named-directories autocompletion
-zstyle ':completion:*:cd:*' tag-order local-directories directory-stack path-directories
-
-# use caching so that commands like apt and dpkg complete are usable
-# zstyle ':completion:*' use-cache on
-# zstyle ':completion:*' cache-path "$HOME/.zcompdump"
-
-# eval $(dircolors -b) && zstyle ":completion:*" list-colors "${(s.:.)LS_COLORS}"
-
-# }}}
+bindkey -M menuselect              '^I'         menu-complete
+bindkey -M menuselect "$terminfo[kcbt]" reverse-menu-complete
 
 # KEYBINDINGS {{{
 
@@ -166,6 +133,10 @@ take() {
 	mkdir -p $1 && cd $1
 }
 
+load_key_anthropic () {
+    export ANTHROPIC_API_KEY=$(op read "op://Personal/Anthropic API Key/credential")
+}
+
 alias ls='ls --color'
 alias l='ls -lah'
 alias ll='ls -lh'
@@ -182,18 +153,15 @@ export DYLD_FALLBACK_LIBRARY_PATH="$HOMEBREW_PREFIX/lib"
 # PROMPT {{{
 
 source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
-source "$HOMEBREW_PREFIX/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
+# source "$HOMEBREW_PREFIX/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
+source "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 eval "$(starship init zsh)"
 
 # }}}
 
-# Terminal Shell Integration {{{
+# opam configuration
+[[ ! -r /Users/jmederos/.opam/opam-init/init.zsh ]] || source /Users/jmederos/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
 
-if [ "$TERMINAL_APP" = "WEZTERM" ]; then
-    # source "/Applications/WezTerm.app/Contents/Resources/wezterm.sh"
-else
-    # do nothing
-fi
-
-# }}}
+# bun completions
+[ -s "$HOME/.bun/_bun" ] && source "/Users/jmederos/.bun/_bun"
