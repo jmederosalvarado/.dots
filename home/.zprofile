@@ -4,6 +4,8 @@ fi
 
 export EDITOR="nvim" VISUAL="nvim"
 
+export DYLD_FALLBACK_LIBRARY_PATH="$HOMEBREW_PREFIX/lib"
+
 # Setup Rust
 path=("$HOME/.cargo/bin" $path)
 
