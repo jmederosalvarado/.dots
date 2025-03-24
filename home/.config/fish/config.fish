@@ -12,7 +12,7 @@ function fish_user_key_bindings
 end
 
 if status is-interactive
-    starship init fish | source
-
     set -g fish_key_bindings fish_user_key_bindings
+
+    starship init fish | source
 end

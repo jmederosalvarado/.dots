@@ -47,6 +47,8 @@ alias history='history -f' # timestamps follow mm/dd/yyyy
 # Set up Homebrew completions (if using Homebrew)
 fpath=($HOMEBREW_PREFIX/share/{zsh/site-functions,zsh-completions} $fpath)
 
+fpath=(/Users/jmederos/.docker/completions $fpath) # docker completions
+
 # Initialize the completion system and (optionally) bash completions
 autoload -Uz compinit && compinit
 autoload -Uz bashcompinit && bashcompinit
