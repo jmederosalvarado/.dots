@@ -6,4 +6,5 @@ theme = catppuccin-mocha
 
 #font-family = Iosevka Term
 #font-size = 14
-#adjust-underline-position = 10%
+font-family = Iosevka Term Custom
+adjust-underline-position = 15%
