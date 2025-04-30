@@ -5,7 +5,7 @@
 [user]
 	name = Jorge Mederos
 	email = jmederosalvarado@gmail.com
-	signingkey = D59753444A22789C
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOjJUdBorQUi19pxojdhcXEWI4fQg4dZ5PM9lZ4XEeKd
 [alias]
     co = checkout
     ci = commit
@@ -16,3 +16,9 @@
     type = cat-file -t
     dump = cat-file -p
     bare = "!sh $HOME/.dots/scripts/git-bare.sh"
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+[commit]
+	gpgsign = true
