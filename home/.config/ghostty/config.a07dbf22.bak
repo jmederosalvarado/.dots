@@ -13,4 +13,3 @@ font-family = Iosevka Term
 font-size = 14
 adjust-underline-position = 25%
 adjust-cell-height = 40%
-keybind = shift+enter=text:\x1b\r

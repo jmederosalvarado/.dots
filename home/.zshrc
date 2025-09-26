@@ -50,7 +50,7 @@ fpath=($HOMEBREW_PREFIX/share/{zsh/site-functions,zsh-completions} $fpath)
 fpath=(/Users/jmederos/.docker/completions $fpath) # docker completions
 
 # Initialize the completion system and (optionally) bash completions
-autoload -Uz compinit && compinit
+autoload -Uz compinit && compinit -u
 autoload -Uz bashcompinit && bashcompinit
 
 # Configure completion options
@@ -124,11 +124,17 @@ take() {
 	mkdir -p $1 && cd $1
 }
 
+nvimin() {
+    NVIM_APPNAME=nvimin bob run nightly "$@"
+}
+
 alias ls='ls --color'
 alias l='ls -lah'
 alias ll='ls -lh'
 
 # }}}
+
+eval "$(mise activate zsh)"
 
 # PROMPT {{{
 
@@ -139,3 +145,11 @@ source "$HOMEBREW_PREFIX/share/zsh-fast-syntax-highlighting/fast-syntax-highligh
 eval "$(starship init zsh)"
 
 # }}}
+
+visa_father () {
+    echo -n ESP326CU6A42714392090610 | pbcopy
+}
+
+visa_mother () {
+    echo -n ESP326CU3842014202275033 | pbcopy
+}
