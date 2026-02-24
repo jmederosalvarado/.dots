@@ -45,9 +45,7 @@ alias history='history -f' # timestamps follow mm/dd/yyyy
 # COMPLETIONS {{{
 
 # Set up Homebrew completions (if using Homebrew)
-fpath=($HOMEBREW_PREFIX/share/{zsh/site-functions,zsh-completions} $fpath)
-
-fpath=(/Users/jmederos/.docker/completions $fpath) # docker completions
+fpath=($HOMEBREW_PREFIX/share/zsh/site-functions $fpath)
 
 # Initialize the completion system and (optionally) bash completions
 autoload -Uz compinit && compinit -u
@@ -125,7 +123,7 @@ take() {
 }
 
 nvimin() {
-    NVIM_APPNAME=nvimin bob run nightly "$@"
+    NVIM_APPNAME=nvimin nvim "$@"
 }
 
 alias ls='ls --color'
@@ -145,11 +143,3 @@ source "$HOMEBREW_PREFIX/share/zsh-fast-syntax-highlighting/fast-syntax-highligh
 eval "$(starship init zsh)"
 
 # }}}
-
-visa_father () {
-    echo -n ESP326CU6A42714392090610 | pbcopy
-}
-
-visa_mother () {
-    echo -n ESP326CU3842014202275033 | pbcopy
-}
