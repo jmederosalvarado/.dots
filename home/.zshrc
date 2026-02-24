@@ -143,3 +143,9 @@ source "$HOMEBREW_PREFIX/share/zsh-fast-syntax-highlighting/fast-syntax-highligh
 eval "$(starship init zsh)"
 
 # }}}
+
+# LOCAL {{{
+
+source ~/.zshrc.local
+
+# }}}
