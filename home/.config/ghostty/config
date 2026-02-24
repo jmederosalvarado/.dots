@@ -2,8 +2,6 @@ auto-update-channel = tip
 
 keybind = global:cmd+grave_accent=toggle_quick_terminal
 
-command = /opt/homebrew/bin/fish
-
 theme = catppuccin-mocha
 
 font-family = Iosevka Term
