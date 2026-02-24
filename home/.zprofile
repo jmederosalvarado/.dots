@@ -6,13 +6,4 @@ export EDITOR="nvim" VISUAL="nvim"
 
 export DYLD_FALLBACK_LIBRARY_PATH="$HOMEBREW_PREFIX/lib"
 
-# Rust
-# path=("/opt/homebrew/opt/rustup/bin" $path)
-
-# Node
-# path=("/opt/homebrew/opt/node@20/bin" $path)
-
-# Nvim using bob
-path=("$HOME/.local/share/bob/nvim-bin" $path)
-
 path=("$HOME/.local/bin" $path)
