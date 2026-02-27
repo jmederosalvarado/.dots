@@ -1,8 +1,9 @@
 [tools]
+bun = "latest"
 codex = "latest"
 neovim = "nightly"
 node = "latest"
-opencode = "latest"
+opencode = "beta"
 rust = { version = "latest", components = "rust-analyzer" }
 
 [tool_alias]
