@@ -1,0 +1,25 @@
+# opencode-dark
+# Generated from opencode theme palette
+
+background = #0a0a0a
+foreground = #eeeeee
+cursor-color = #fab283
+selection-background = cell-foreground
+selection-foreground = cell-background
+
+palette = 0=#0a0a0a
+palette = 1=#e06c75
+palette = 2=#7fd88f
+palette = 3=#e5c07b
+palette = 4=#5c9cf5
+palette = 5=#9d7cd8
+palette = 6=#56b6c2
+palette = 7=#eeeeee
+palette = 8=#606060
+palette = 9=#e26a75
+palette = 10=#b8db87
+palette = 11=#ffc09f
+palette = 12=#8bb6ff
+palette = 13=#b79be8
+palette = 14=#7fd2dd
+palette = 15=#ffffff

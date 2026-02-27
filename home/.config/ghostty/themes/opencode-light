@@ -1,0 +1,25 @@
+# opencode-light
+# Generated from opencode theme palette
+
+background = #ffffff
+foreground = #1a1a1a
+cursor-color = #3b7dd8
+selection-background = cell-foreground
+selection-foreground = cell-background
+
+palette = 0=#1a1a1a
+palette = 1=#d1383d
+palette = 2=#3d9a57
+palette = 3=#b0851f
+palette = 4=#3b7dd8
+palette = 5=#7b5bb6
+palette = 6=#318795
+palette = 7=#d4d4d4
+palette = 8=#8a8a8a
+palette = 9=#e26a75
+palette = 10=#4db380
+palette = 11=#d68c27
+palette = 12=#5c9cf5
+palette = 13=#9d7cd8
+palette = 14=#56b6c2
+palette = 15=#ffffff

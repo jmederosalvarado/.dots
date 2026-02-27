@@ -2,7 +2,7 @@ auto-update-channel = tip
 
 keybind = global:cmd+grave_accent=toggle_quick_terminal
 
-theme = catppuccin-mocha
+theme = dark:opencode-dark,light:opencode-light
 
 font-family = Iosevka Term
 font-size = 14
