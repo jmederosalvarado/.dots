@@ -2,6 +2,7 @@ format = """
 $username\
 $hostname\
 $shlvl\
+${custom.github_repo}\
 $directory\
 $git_branch\
 $git_commit\
@@ -10,7 +11,6 @@ $git_status\
 $conda\
 $memory_usage\
 $env_var\
-$custom\
 $cmd_duration\
 $time\
 $line_break\
@@ -24,9 +24,34 @@ $character\
 # read_only = " 󰉐"
 read_only = " "
 style = "bold blue"
-
-[git_branch]
-# symbol = " "
+truncate_to_repo = true
+format = "([$path]($style)[$read_only]($read_only_style) )"
+repo_root_format = "[.$path]($style)[$read_only]($read_only_style) "
+repo_root_style = "bold blue"
+before_repo_root_style = "bold blue"
 
 [git_commit]
 tag_symbol = "  "
+
+[custom.github_repo]
+require_repo = true
+when = "true"
+command = '''
+repo=""
+for r in $(git remote); do
+  url="$(git remote get-url "$r" 2>/dev/null || true)"
+  case "$url" in
+    *github.com*:*|*github.com/*)
+      repo="$(basename "${url%.git}")"
+      break
+      ;;
+  esac
+done
+if [ -z "$repo" ]; then
+  root="$(git rev-parse --show-toplevel 2>/dev/null || true)"
+  repo="$(basename "$root")"
+fi
+printf "%s" "$repo"
+'''
+style = "bold purple"
+format = "[$output]($style):"
