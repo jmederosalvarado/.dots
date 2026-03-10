@@ -1,6 +1,7 @@
 [tools]
 bun = "latest"
 codex = "latest"
+foundry = "latest"
 neovim = "nightly"
 node = "latest"
 opencode = "beta"
