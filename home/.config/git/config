@@ -18,6 +18,11 @@
     bare = "!sh $HOME/.dots/scripts/git-bare.sh"
 [diff]
 	external = difft
+[merge]
+	conflictStyle = diff3
+[merge "mergiraf"]
+	name = mergiraf
+	driver = mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P -l %L
 [gpg]
 	format = ssh
 [gpg "ssh"]
@@ -26,6 +31,8 @@
 	gpgsign = true
 [push]
 	autoSetupRemote = true
+[core]
+	attributesFile = ~/.config/git/attributes
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
