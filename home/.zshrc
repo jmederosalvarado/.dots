@@ -6,9 +6,6 @@ else
 	exit 1
 fi
 
-# Remove duplicates from PATH
-typeset -U path
-
 # OPTIONS {{{
 
 # Directory navigation enhancements:
@@ -43,9 +40,6 @@ alias history='history -f' # timestamps follow mm/dd/yyyy
 # }}}
 
 # COMPLETIONS {{{
-
-# Set up Homebrew completions (if using Homebrew)
-fpath=($HOMEBREW_PREFIX/share/zsh/site-functions $fpath)
 
 # Initialize the completion system and (optionally) bash completions
 autoload -Uz compinit && compinit -u
