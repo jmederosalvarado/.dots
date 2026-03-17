@@ -10,9 +10,5 @@ rust = { version = "latest", components = "rust-analyzer" }
 [tool_alias]
 opencode = "npm:opencode-ai"
 
-[env]
-# OPENCODE_EXPERIMENTAL_PLAN_MODE = "true"
-OPENCODE_EXPERIMENTAL_MARKDOWN = "true"
-
 [settings]
 idiomatic_version_file_enable_tools = []
