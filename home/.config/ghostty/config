@@ -2,7 +2,7 @@ auto-update-channel = tip
 
 keybind = global:cmd+grave_accent=toggle_quick_terminal
 
-theme = dark:opencode-dark,light:opencode-light
+theme = dark:GitHub Dark Default,light:GitHub Light Default
 
 font-family = Iosevka Term
 font-size = 14

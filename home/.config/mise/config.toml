@@ -4,7 +4,7 @@ codex = "latest"
 foundry = "latest"
 neovim = "nightly"
 node = "latest"
-opencode = "beta"
+opencode = "latest"
 rust = { version = "latest", components = "rust-analyzer" }
 
 [tool_alias]
